@@ -1,0 +1,2285 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>সর্বজনীন ক্যালকুলেটর · Universal Calculator</title>
+<meta name="description" content="বিজ্ঞান, গণিত, পদার্থবিজ্ঞান, রসায়ন, জীববিজ্ঞান, ব্যবসা ও ব্যাংকিং হিসাবের জন্য একটি সম্পূর্ণ ক্যালকুলেটর — বৈজ্ঞানিক ক্যালকুলেটর, একক রূপান্তর, পর্যায় সারণি ও আরও অনেক কিছু।">
+<meta name="keywords" content="ক্যালকুলেটর, বৈজ্ঞানিক ক্যালকুলেটর, একক রূপান্তর, পর্যায় সারণি, calculator, scientific calculator, unit converter, periodic table, bangla calculator">
+<meta name="theme-color" content="#B4791F">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="সর্বজনীন ক্যালকুলেটর · Universal Calculator">
+<meta property="og:description" content="বিজ্ঞান, গণিত, ব্যবসা ও ব্যাংকিং হিসাবের সব সমাধান এক জায়গায়।">
+<meta property="og:locale" content="bn_BD">
+<meta property="og:locale:alternate" content="en_US">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "সর্বজনীন ক্যালকুলেটর — Universal Calculator",
+  "description": "বিজ্ঞান, গণিত, পদার্থবিজ্ঞান, রসায়ন, জীববিজ্ঞান, ব্যবসা ও ব্যাংকিং হিসাবের জন্য একটি সম্পূর্ণ ক্যালকুলেটর।",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "inLanguage": ["bn", "en"],
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "BDT"
+  }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+
+    --paper: #EDEEE6;
+    --panel: #F6F6F1;
+    --ink: #17213A;
+    --ink-soft: #4B5670;
+    --ink-faint: #8890A3;
+    --line: #CBCDBE;
+    --line-soft: #DEDFD3;
+    --brass: #B4791F;
+    --brass-dark: #8C5C16;
+    --brass-tint: #F3E4C8;
+
+    --c-sci: #B4791F;
+    --c-convert: #1F7A6C;
+    --c-math: #6B4E9E;
+    --c-physics: #2A5CAA;
+    --c-chem: #3F8F4F;
+    --c-bio: #B4472F;
+    --c-business: #A67A12;
+    --c-banking: #1D5C63;
+    --c-history: #58607A;
+
+    --cat-metal: #2A5CAA;
+    --cat-metalloid: #6B4E9E;
+    --cat-nonmetal: #3F8F4F;
+    --cat-halogen: #B4472F;
+    --cat-noble: #A67A12;
+
+    --font-head: 'Space Grotesk', 'Noto Sans Bengali', sans-serif;
+    --font-body: 'Noto Sans Bengali', 'Space Grotesk', sans-serif;
+    --font-mono: 'IBM Plex Mono', 'Noto Sans Bengali', monospace;
+
+    --radius: 5px;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #14181F;
+      --panel: #1B2029;
+      --ink: #ECEAE0;
+      --ink-soft: #B7BBC9;
+      --ink-faint: #7B8194;
+      --line: #333A46;
+      --line-soft: #262C37;
+      --brass: #D9A03D;
+      --brass-dark: #F0BA5C;
+      --brass-tint: #2A2218;
+      color-scheme: dark;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  body {
+    margin: 0;
+    background:
+      radial-gradient(820px 460px at 10% -8%, color-mix(in srgb, var(--tab-accent, var(--brass)) 26%, transparent) 0%, transparent 60%),
+      radial-gradient(720px 480px at 105% 6%, color-mix(in srgb, var(--c-convert) 18%, transparent) 0%, transparent 56%),
+      radial-gradient(700px 480px at 90% 70%, color-mix(in srgb, var(--c-bio) 12%, transparent) 0%, transparent 55%),
+      radial-gradient(900px 620px at 15% 105%, color-mix(in srgb, var(--tab-accent, var(--c-math)) 16%, transparent) 0%, transparent 58%),
+      var(--paper);
+    background-attachment: fixed;
+    color: var(--ink);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    min-height: 100%;
+    transition: background 0.6s ease;
+  }
+  button, input, select, textarea { font-family: inherit; color: inherit; }
+  button:focus-visible, input:focus-visible, select:focus-visible, a:focus-visible {
+    outline: 2px solid var(--brass);
+    outline-offset: 2px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+  }
+
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 16px 48px; }
+
+  header.top {
+    position: sticky; top: 0; z-index: 20;
+    padding-top: calc(14px + env(safe-area-inset-top, 0px));
+    padding-bottom: 10px;
+    background: color-mix(in srgb, var(--paper) 92%, transparent);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  .top-inner {
+    max-width: 760px; margin: 0 auto; padding: 0 16px;
+    display: flex; align-items: baseline; justify-content: space-between; gap: 10px;
+  }
+  .brand { display: flex; align-items: baseline; gap: 9px; min-width: 0; }
+  .brand .mark { font-family: var(--font-mono); font-size: 13px; color: var(--brass); border: 1px solid var(--brass); border-radius: 4px; padding: 1px 5px; flex: none; }
+  .brand h1 { font-family: var(--font-head); font-size: 18px; font-weight: 600; margin: 0; letter-spacing: 0.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .header-actions { display: flex; align-items: center; gap: 7px; flex: none; }
+  .lang-btn {
+    flex: none; background: var(--panel); border: 1px solid var(--line); border-radius: 999px;
+    padding: 6px 13px; font-size: 13px; font-weight: 600; cursor: pointer; color: var(--ink);
+  }
+  .lang-btn:active { background: var(--brass-tint); }
+  #histBtn { padding: 6px 10px; font-size: 15px; line-height: 1; }
+  .subtitle { max-width: 760px; margin: 6px auto 0; padding: 0 16px; font-size: 13px; color: var(--ink-soft); }
+
+  nav.tabs {
+    display: flex; gap: 7px; overflow-x: auto; padding: 10px 16px 2px;
+    max-width: 760px; margin: 0 auto; -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  nav.tabs::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    flex: none; display: flex; align-items: center; gap: 6px;
+    border: 1px solid var(--line); background: var(--panel); color: var(--ink-soft);
+    border-radius: 999px; padding: 7px 13px; font-size: 13.5px; font-weight: 500; cursor: pointer;
+    white-space: nowrap;
+  }
+  .tab-btn .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--dot); flex: none; }
+  .tab-btn.active { color: var(--ink); border-color: var(--dot); background: color-mix(in srgb, var(--dot) 12%, var(--panel)); font-weight: 600; }
+
+  main { padding-top: 16px; }
+  section.view { display: none; }
+  section.view.active { display: block; }
+
+  h2.view-title { font-family: var(--font-head); font-size: 20px; margin: 4px 0 3px; }
+  p.view-desc { font-size: 13.5px; color: var(--ink-soft); margin: 0 0 16px; }
+
+  /* ---- calculator panel: one box per category, a picker + a live stage ---- */
+  .calc-panel {
+    background: var(--panel); border: 1px solid var(--line); border-left: 4px solid var(--accent, var(--brass));
+    border-radius: 10px; margin-bottom: 14px;
+    box-shadow: 0 2px 10px color-mix(in srgb, var(--ink) 8%, transparent);
+    transition: border-color .25s ease;
+  }
+  .calc-single { padding: 16px; }
+  .picker-label { display: block; font-size: 11.5px; font-weight: 600; color: var(--ink-soft); margin-bottom: 6px; letter-spacing: 0.02em; }
+  .calc-picker {
+    width: 100%; padding: 12px 14px; border: 1px solid var(--line); border-radius: 7px;
+    background: var(--paper); font-family: var(--font-head); font-size: 15px; font-weight: 600; color: var(--ink);
+    cursor: pointer;
+  }
+  .calc-picker:focus { border-color: var(--accent, var(--brass)); }
+  .calc-stage { margin-top: 15px; padding-top: 15px; border-top: 1px dashed var(--line-soft); }
+  .stage-desc { font-size: 12.5px; color: var(--ink-soft); margin: 0 0 12px; line-height: 1.5; }
+  .field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-bottom: 10px; }
+  .field-grid.single { grid-template-columns: 1fr; }
+  .field { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+  .field label { font-size: 12px; color: var(--ink-soft); font-weight: 500; }
+  .field input, .field select, .field textarea {
+    border: 1px solid var(--line); border-radius: 4px; padding: 8px 9px; font-size: 14.5px;
+    background: var(--paper); color: var(--ink); width: 100%;
+  }
+  .field textarea { resize: vertical; min-height: 46px; font-family: var(--font-mono); font-size: 13px; }
+  .calc-actions { display: flex; gap: 8px; align-items: center; }
+  .btn-calc {
+    background: var(--accent, var(--brass)); color: #fff; border: none; border-radius: 4px;
+    padding: 9px 16px; font-size: 13.5px; font-weight: 600; cursor: pointer;
+  }
+  .btn-calc:active { opacity: 0.85; }
+  .btn-clear-panel {
+    background: transparent; border: 1px solid var(--line); color: var(--ink-soft);
+    border-radius: 4px; padding: 9px 13px; font-size: 13px; cursor: pointer;
+  }
+  .result-box {
+    margin-top: 11px; padding: 10px 12px; border-radius: 4px;
+    background: color-mix(in srgb, var(--accent, var(--brass)) 10%, var(--paper));
+    border: 1px solid color-mix(in srgb, var(--accent, var(--brass)) 35%, var(--line));
+  }
+  .result-box[hidden] { display: none; }
+  .result-line { display: flex; justify-content: space-between; gap: 10px; font-size: 13.5px; padding: 2px 0; }
+  .result-line .rlabel { color: var(--ink-soft); }
+  .result-line .rval { font-family: var(--font-mono); font-weight: 600; text-align: right; }
+  .result-err { font-size: 13px; color: #A23B2E; font-weight: 500; }
+  .copy-btn {
+    margin-top: 8px; border: 1px solid color-mix(in srgb, var(--accent, var(--brass)) 40%, var(--line));
+    background: transparent; color: var(--accent, var(--brass)); border-radius: 4px;
+    padding: 5px 10px; font-size: 11.5px; font-weight: 600; cursor: pointer;
+  }
+  .copy-btn:active { background: color-mix(in srgb, var(--accent, var(--brass)) 15%, transparent); }
+
+  /* ---- scientific calculator ---- */
+  .sci-wrap { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 12px; }
+  .sci-display { background: var(--ink); color: #EDEEE6; border-radius: 4px; padding: 14px 14px 12px; margin-bottom: 10px; }
+  .sci-preview { font-family: var(--font-mono); font-size: 12.5px; min-height: 16px; opacity: 0.55; text-align: right; word-break: break-all; }
+  .sci-expr { font-family: var(--font-mono); font-size: 21px; text-align: right; min-height: 30px; word-break: break-all; line-height: 1.3; }
+  .sci-modes { display: flex; gap: 8px; margin-bottom: 9px; flex-wrap: wrap; }
+  .mode-chip {
+    font-size: 11.5px; font-weight: 600; border: 1px solid var(--line); border-radius: 999px;
+    padding: 4px 10px; background: var(--paper); cursor: pointer; color: var(--ink-soft);
+  }
+  .mode-chip.on { background: var(--brass); border-color: var(--brass); color: #fff; }
+  .sci-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-bottom: 8px; }
+  .sci-grid button, .sci-keypad button {
+    border: 1px solid var(--line); background: var(--paper); color: var(--ink);
+    border-radius: 4px; padding: 11px 2px; font-size: 14px; font-family: var(--font-mono);
+    cursor: pointer; line-height: 1;
+  }
+  .sci-grid button.op, .sci-keypad button.op { background: var(--brass-tint); color: var(--brass-dark); font-weight: 600; }
+  .sci-grid button.fn { color: var(--ink-soft); font-size: 12.5px; }
+  .sci-grid button.eq, .sci-keypad button.eq { background: var(--brass); color: #fff; font-weight: 700; }
+  .sci-grid button.wide2, .sci-keypad button.wide2 { grid-column: span 2; }
+  .sci-keypad button.wide4 { grid-column: span 4; }
+  .sci-grid button:active, .sci-keypad button:active { opacity: 0.8; }
+  .sci-keypad { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+  .sci-keypad button { font-size: 16px; padding: 13px 2px; }
+  .sci-keypad button.eq { font-size: 15px; }
+
+  /* ---- converter ---- */
+  .conv-cat-select { width: 100%; padding: 9px 10px; border: 1px solid var(--line); border-radius: 4px; background: var(--panel); font-size: 14.5px; margin-bottom: 12px; }
+  .conv-row { display: flex; gap: 8px; align-items: flex-end; margin-bottom: 8px; }
+  .conv-col { flex: 1; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+  .conv-col label { font-size: 12px; color: var(--ink-soft); }
+  .conv-col input, .conv-col select { border: 1px solid var(--line); border-radius: 4px; padding: 9px; font-size: 14.5px; background: var(--panel); width: 100%; }
+  .conv-swap { flex: none; border: 1px solid var(--line); background: var(--panel); border-radius: 4px; padding: 9px 10px; cursor: pointer; font-size: 15px; }
+  .conv-result { margin-top: 6px; padding: 12px; border-radius: 4px; background: color-mix(in srgb, var(--c-convert) 10%, var(--paper)); border: 1px solid color-mix(in srgb, var(--c-convert) 35%, var(--line)); font-family: var(--font-mono); font-size: 17px; font-weight: 600; text-align: center; }
+
+  /* ---- periodic table / compounds ---- */
+  .pt-search {
+    width: 100%; padding: 9px 10px; border: 1px solid var(--line); border-radius: 4px;
+    background: var(--paper); font-size: 14.5px; margin-bottom: 10px;
+  }
+  .pt-list { max-height: 340px; overflow-y: auto; border: 1px solid var(--line-soft); border-radius: 4px; }
+  .pt-row { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-bottom: 1px solid var(--line-soft); font-size: 13px; }
+  .pt-row:last-child { border-bottom: none; }
+  .pt-z { font-family: var(--font-mono); font-size: 11px; color: var(--ink-faint); width: 24px; flex: none; }
+  .pt-sym {
+    font-family: var(--font-mono); font-weight: 700; font-size: 14px; width: 34px; flex: none; text-align: center;
+    border-radius: 3px; padding: 3px 0; color: #fff; background: var(--cat-color, var(--ink-faint));
+  }
+  .pt-names { flex: 1; min-width: 0; }
+  .pt-name-bn { font-weight: 500; }
+  .pt-name-en { font-size: 11.5px; color: var(--ink-faint); }
+  .pt-mass { font-family: var(--font-mono); font-size: 12.5px; color: var(--ink-soft); flex: none; text-align: right; }
+  .pt-empty { text-align: center; color: var(--ink-faint); font-size: 13px; padding: 20px 10px; }
+  .pt-legend { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 12px; font-size: 11px; color: var(--ink-soft); }
+  .pt-legend span { display: inline-flex; align-items: center; gap: 4px; }
+  .pt-legend i { width: 9px; height: 9px; border-radius: 2px; display: inline-block; }
+  .compound-breakdown { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 12.5px; }
+  .compound-breakdown th, .compound-breakdown td { text-align: left; padding: 5px 6px; border-bottom: 1px solid var(--line-soft); }
+  .compound-breakdown th { color: var(--ink-soft); font-weight: 600; font-size: 11.5px; }
+  .compound-breakdown td.num { font-family: var(--font-mono); text-align: right; }
+  .compound-total { margin-top: 8px; font-weight: 700; font-size: 14.5px; }
+  .compound-item {
+    display: flex; justify-content: space-between; align-items: center; gap: 8px;
+    padding: 9px 10px; border-bottom: 1px solid var(--line-soft); font-size: 13px; cursor: pointer;
+  }
+  .compound-item:last-child { border-bottom: none; }
+  .compound-item:active { background: var(--brass-tint); }
+  .compound-formula { font-family: var(--font-mono); font-weight: 700; }
+  .compound-mass { font-family: var(--font-mono); font-size: 12px; color: var(--ink-soft); flex: none; }
+
+  /* ---- history ---- */
+  .hist-toolbar { display: flex; justify-content: flex-end; margin-bottom: 10px; }
+  .hist-clear { border: 1px solid var(--line); background: var(--panel); color: var(--ink-soft); border-radius: 4px; padding: 7px 12px; font-size: 12.5px; cursor: pointer; }
+  .hist-item { display: flex; gap: 10px; padding: 10px 4px; border-bottom: 1px solid var(--line-soft); align-items: flex-start; }
+  .hist-del { flex: none; background: transparent; border: none; color: var(--ink-faint); font-size: 13px; cursor: pointer; padding: 4px 6px; border-radius: 4px; }
+  .hist-del:active { background: color-mix(in srgb, #A23B2E 15%, transparent); color: #A23B2E; }
+  .hist-dot { width: 8px; height: 8px; border-radius: 50%; margin-top: 5px; flex: none; }
+  .hist-body { flex: 1; min-width: 0; }
+  .hist-name { font-size: 12.5px; font-weight: 600; color: var(--ink-soft); }
+  .hist-expr { font-family: var(--font-mono); font-size: 13.5px; margin-top: 1px; word-break: break-word; }
+  .hist-time { font-size: 11px; color: var(--ink-faint); margin-top: 2px; }
+  .hist-empty { text-align: center; color: var(--ink-faint); font-size: 13.5px; padding: 40px 10px; }
+
+  @media (max-width: 380px) {
+    .field-grid { grid-template-columns: 1fr; }
+    .sci-expr { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <div class="brand"><span class="mark">∑</span><h1 id="siteTitle">সর্বজনীন ক্যালকুলেটর</h1></div>
+    <div class="header-actions">
+      <button class="lang-btn" id="histBtn" type="button" aria-label="History">🕘</button>
+      <button class="lang-btn" id="langBtn" type="button">EN</button>
+    </div>
+  </div>
+  <p class="subtitle" id="siteSubtitle">বিজ্ঞান, গণিত, ব্যবসা ও ব্যাংকিং হিসাবের সব সমাধান এক জায়গায়</p>
+  <nav class="tabs" id="tabs"></nav>
+</header>
+<div class="wrap">
+  <main id="content"></main>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+/* ============================= STATE ============================= */
+var state = {
+  lang: 'bn',
+  tab: 'sci',
+  angleMode: 'deg',
+  inv: false,
+  memory: 0,
+  ans: 0,
+  sciExpr: '',
+  justEvaluated: false,
+  history: [],
+  selectedCalc: {}
+};
+
+try {
+  var savedHist = localStorage.getItem('calc_history_v1');
+  if (savedHist) state.history = JSON.parse(savedHist);
+} catch(e) { state.history = []; }
+
+function saveHistory() {
+  try { localStorage.setItem('calc_history_v1', JSON.stringify(state.history.slice(0,300))); } catch(e) {}
+}
+
+function L(pair) { return pair[state.lang]; }
+
+/* ============================= UI STRINGS ============================= */
+var UI = {
+  title: {bn:'সর্বজনীন ক্যালকুলেটর', en:'Universal Calculator'},
+  subtitle: {bn:'বিজ্ঞান, গণিত, ব্যবসা ও ব্যাংকিং হিসাবের সব সমাধান এক জায়গায়', en:'Science, math, business and banking calculations in one place'},
+  calculate: {bn:'হিসাব করুন', en:'Calculate'},
+  clear: {bn:'মুছুন', en:'Clear'},
+  result: {bn:'ফলাফল', en:'Result'},
+  clearHistory: {bn:'সব মুছুন', en:'Clear all'},
+  noHistory: {bn:'এখনো কোনো হিসাব করা হয়নি', en:'No calculations yet'},
+  inv: {bn:'ইনভার্স', en:'INV'},
+  langSwitch: {bn:'EN', en:'বাং'},
+  from: {bn:'থেকে', en:'From'},
+  to: {bn:'ফলাফল', en:'To'},
+  unitType: {bn:'একক প্রকার', en:'Unit type'},
+  invalidInput: {bn:'সঠিক সংখ্যা দিন', en:'Please enter valid numbers'},
+  viewSubs: {
+    sci: {bn:'ক্যালকুলেটরে সরাসরি বোতাম চেপে হিসাব করুন — Casio fx-991CW ধাঁচের।', en:'Full scientific calculator, Casio fx-991CW style keypad.'},
+    convert: {bn:'যেকোনো একক থেকে যেকোনো এককে রূপান্তর করুন।', en:'Convert between any units, instantly.'},
+    math: {bn:'পাটিগণিত, বীজগণিত ও জ্যামিতির হিসাব।', en:'Arithmetic, algebra and geometry calculators.'},
+    physics: {bn:'পদার্থবিজ্ঞানের সাধারণ সূত্রভিত্তিক হিসাব।', en:'Common physics formula calculators.'},
+    chemistry: {bn:'রসায়নের হিসাব — মোল, ঘনমাত্রা, pH এবং আরও।', en:'Chemistry calculators — moles, concentration, pH and more.'},
+    biology: {bn:'শরীরবৃত্তীয় ও স্বাস্থ্য সংক্রান্ত হিসাব।', en:'Body and health-related calculators.'},
+    business: {bn:'লাভ-ক্ষতি, ছাড়, ভ্যাট ও সুদের হিসাব।', en:'Profit, discount, tax and interest calculators.'},
+    banking: {bn:'ইএমআই, আমানত ও সঞ্চয়ের হিসাব।', en:'EMI, deposit and savings calculators.'},
+    history: {bn:'আপনার সকল হিসাবের তালিকা।', en:'A log of everything you have calculated.'}
+  }
+};
+
+var TABS = [
+  {id:'sci', name:{bn:'বৈজ্ঞানিক', en:'Scientific'}, color:'var(--c-sci)'},
+  {id:'convert', name:{bn:'একক রূপান্তর', en:'Converter'}, color:'var(--c-convert)'},
+  {id:'math', name:{bn:'গণিত', en:'Math'}, color:'var(--c-math)'},
+  {id:'physics', name:{bn:'পদার্থবিজ্ঞান', en:'Physics'}, color:'var(--c-physics)'},
+  {id:'chemistry', name:{bn:'রসায়ন', en:'Chemistry'}, color:'var(--c-chem)'},
+  {id:'biology', name:{bn:'জীববিজ্ঞান', en:'Biology'}, color:'var(--c-bio)'},
+  {id:'business', name:{bn:'ব্যবসা', en:'Business'}, color:'var(--c-business)'},
+  {id:'banking', name:{bn:'ব্যাংকিং', en:'Banking'}, color:'var(--c-banking)'},
+  {id:'history', name:{bn:'ইতিহাস', en:'History'}, color:'var(--c-history)'}
+];
+var TAB_HEX = {
+  sci:'#B4791F', convert:'#1F7A6C', math:'#6B4E9E', physics:'#2A5CAA',
+  chemistry:'#3F8F4F', biology:'#B4472F', business:'#A67A12', banking:'#1D5C63', history:'#58607A'
+};
+
+/* ============================= HELPERS ============================= */
+function fmt(n, prec) {
+  if (n === null || n === undefined || Number.isNaN(n)) return state.lang==='bn' ? 'অসংজ্ঞায়িত' : 'Undefined';
+  if (!isFinite(n)) return n > 0 ? '∞' : '-∞';
+  if (Math.abs(n) < 1e-10) n = 0;
+  var p = prec || 8;
+  var s = Number(n.toPrecision(p)).toString();
+  return s;
+}
+function fmtMoney(n) {
+  if (Number.isNaN(n) || !isFinite(n)) return fmt(n);
+  return n.toLocaleString('en-US', {maximumFractionDigits: 2, minimumFractionDigits: 2});
+}
+function num(v) { var x = parseFloat(v); return x; }
+function isNum(v) { return v !== '' && v !== null && v !== undefined && !Number.isNaN(parseFloat(v)) && isFinite(parseFloat(v)); }
+
+function CalcError(bn, en) { this.bn = bn; this.en = en; this.isCalcError = true; }
+function fail(bn, en) { throw new CalcError(bn, en); }
+
+function gcdFn(a, b) { a = Math.abs(Math.round(a)); b = Math.abs(Math.round(b)); while (b) { var t = b; b = a % b; a = t; } return a; }
+function lcmFn(a, b) { if (a === 0 || b === 0) return 0; return Math.abs(a * b) / gcdFn(a, b); }
+function factorial(n) {
+  n = Math.round(n);
+  if (n < 0) return NaN;
+  if (n > 170) return Infinity;
+  var r = 1; for (var i = 2; i <= n; i++) r *= i; return r;
+}
+function nPr(n, r) { if (r > n || r < 0) return NaN; return factorial(n) / factorial(n - r); }
+function nCr(n, r) { if (r > n || r < 0) return NaN; return factorial(n) / (factorial(r) * factorial(n - r)); }
+
+function pushHistory(catId, calcName, exprText, resultText) {
+  state.history.unshift({
+    ts: Date.now(), cat: catId, name: calcName, expr: exprText, result: resultText
+  });
+  if (state.history.length > 300) state.history.length = 300;
+  saveHistory();
+  if (state.tab === 'history') renderView();
+}
+
+function fmtTime(ts) {
+  try {
+    var d = new Date(ts);
+    return d.toLocaleString(state.lang==='bn' ? 'bn-BD' : 'en-US', {month:'short', day:'numeric', hour:'2-digit', minute:'2-digit'});
+  } catch(e) { return ''; }
+}
+
+/* ============================= SCIENTIFIC ENGINE ============================= */
+var FUNCS = {sin:1,cos:1,tan:1,asin:1,acos:1,atan:1,sinh:1,cosh:1,tanh:1,log:1,ln:1,sqrt:1,cbrt:1,abs:1,exp:1,ncr:2,npr:2};
+var CONSTS = {pi:1,e:1,ans:1};
+
+function tokenize(expr) {
+  var tokens = [];
+  var s = expr.replace(/\s+/g, '');
+  var i = 0;
+  while (i < s.length) {
+    var c = s[i];
+    if (c === '×') { tokens.push({type:'op', value:'*'}); i++; continue; }
+    if (c === '÷') { tokens.push({type:'op', value:'/'}); i++; continue; }
+    if (c === '−') { tokens.push({type:'op', value:'-'}); i++; continue; }
+    if (c === 'π') { tokens.push({type:'id', value:'pi'}); i++; continue; }
+    if (c === '√') { tokens.push({type:'id', value:'sqrt'}); i++; continue; }
+    if (/[0-9.]/.test(c)) {
+      var numStr = c; i++;
+      while (i < s.length && /[0-9.]/.test(s[i])) { numStr += s[i]; i++; }
+      tokens.push({type:'num', value: parseFloat(numStr)});
+      continue;
+    }
+    if (/[a-zA-Z]/.test(c)) {
+      var id = c; i++;
+      while (i < s.length && /[a-zA-Z]/.test(s[i])) { id += s[i]; i++; }
+      tokens.push({type:'id', value:id});
+      continue;
+    }
+    if ('+-*/^!(),%'.indexOf(c) !== -1) {
+      tokens.push({type:'op', value:c}); i++; continue;
+    }
+    i++;
+  }
+  return tokens;
+}
+
+function insertImplicitMult(tokens) {
+  var out = [];
+  for (var j = 0; j < tokens.length; j++) {
+    var cur = tokens[j];
+    if (out.length) {
+      var prev = out[out.length - 1];
+      var prevEndsValue = prev.type === 'num' || (prev.type === 'op' && prev.value === ')') || prev.type === 'id';
+      var curStartsValue = cur.type === 'num' || cur.type === 'id' || (cur.type === 'op' && cur.value === '(');
+      var isFuncCall = prev.type === 'id' && FUNCS[prev.value.toLowerCase()] && cur.type === 'op' && cur.value === '(';
+      if (prevEndsValue && curStartsValue && !isFuncCall) {
+        out.push({type:'op', value:'*'});
+      }
+    }
+    out.push(cur);
+  }
+  return out;
+}
+
+function toRad(x) { return state.angleMode === 'deg' ? x * Math.PI / 180 : x; }
+function toDegOut(x) { return state.angleMode === 'deg' ? x * 180 / Math.PI : x; }
+
+function callFunc(name, args) {
+  var a = args[0];
+  switch (name) {
+    case 'sin': return Math.sin(toRad(a));
+    case 'cos': return Math.cos(toRad(a));
+    case 'tan': return Math.tan(toRad(a));
+    case 'asin': return toDegOut(Math.asin(a));
+    case 'acos': return toDegOut(Math.acos(a));
+    case 'atan': return toDegOut(Math.atan(a));
+    case 'sinh': return Math.sinh(a);
+    case 'cosh': return Math.cosh(a);
+    case 'tanh': return Math.tanh(a);
+    case 'log': return Math.log10(a);
+    case 'ln': return Math.log(a);
+    case 'sqrt': return Math.sqrt(a);
+    case 'cbrt': return Math.cbrt(a);
+    case 'abs': return Math.abs(a);
+    case 'exp': return Math.exp(a);
+    case 'ncr': return nCr(a, args[1]);
+    case 'npr': return nPr(a, args[1]);
+  }
+  throw new Error('unknown fn');
+}
+
+function Parser(tokens) { this.t = tokens; this.p = 0; }
+Parser.prototype.peek = function() { return this.t[this.p]; };
+Parser.prototype.next = function() { return this.t[this.p++]; };
+Parser.prototype.parseExpression = function() {
+  var left = this.parseTerm();
+  while (this.peek() && this.peek().type === 'op' && (this.peek().value === '+' || this.peek().value === '-')) {
+    var op = this.next().value;
+    var right = this.parseTerm();
+    left = op === '+' ? left + right : left - right;
+  }
+  return left;
+};
+Parser.prototype.parseTerm = function() {
+  var left = this.parseUnary();
+  while (this.peek() && this.peek().type === 'op' && (this.peek().value === '*' || this.peek().value === '/' || this.peek().value === '%')) {
+    var op = this.next().value;
+    var right = this.parseUnary();
+    if (op === '*') left *= right; else if (op === '/') left /= right; else left = left % right;
+  }
+  return left;
+};
+Parser.prototype.parseUnary = function() {
+  if (this.peek() && this.peek().type === 'op' && this.peek().value === '-') { this.next(); return -this.parseUnary(); }
+  if (this.peek() && this.peek().type === 'op' && this.peek().value === '+') { this.next(); return this.parseUnary(); }
+  return this.parsePower();
+};
+Parser.prototype.parsePower = function() {
+  var base = this.parsePostfix();
+  if (this.peek() && this.peek().type === 'op' && this.peek().value === '^') {
+    this.next();
+    var exp = this.parseUnary();
+    base = Math.pow(base, exp);
+  }
+  return base;
+};
+Parser.prototype.parsePostfix = function() {
+  var val = this.parsePrimary();
+  while (this.peek() && this.peek().type === 'op' && this.peek().value === '!') {
+    this.next(); val = factorial(val);
+  }
+  return val;
+};
+Parser.prototype.parsePrimary = function() {
+  var t = this.peek();
+  if (!t) throw new Error('unexpected end');
+  if (t.type === 'num') { this.next(); return t.value; }
+  if (t.type === 'op' && t.value === '(') {
+    this.next();
+    var val = this.parseExpression();
+    if (this.peek() && this.peek().value === ')') this.next();
+    return val;
+  }
+  if (t.type === 'id') {
+    this.next();
+    var name = t.value.toLowerCase();
+    if (this.peek() && this.peek().type === 'op' && this.peek().value === '(') {
+      this.next();
+      var args = [this.parseExpression()];
+      while (this.peek() && this.peek().value === ',') { this.next(); args.push(this.parseExpression()); }
+      if (this.peek() && this.peek().value === ')') this.next();
+      return callFunc(name, args);
+    }
+    if (name === 'pi') return Math.PI;
+    if (name === 'e') return Math.E;
+    if (name === 'ans') return state.ans;
+    throw new Error('unknown id ' + name);
+  }
+  throw new Error('unexpected token');
+};
+
+function evalExpr(expr) {
+  if (!expr || !expr.trim()) return {error: true};
+  try {
+    var tokens = insertImplicitMult(tokenize(expr));
+    var p = new Parser(tokens);
+    var val = p.parseExpression();
+    if (typeof val !== 'number' || Number.isNaN(val)) return {error: true};
+    return {value: val};
+  } catch (e) {
+    return {error: true};
+  }
+}
+
+/* ============================= RENDER: SHELL ============================= */
+var content = document.getElementById('content');
+var tabsNav = document.getElementById('tabs');
+
+function renderTabs() {
+  tabsNav.innerHTML = '';
+  TABS.forEach(function(t) {
+    var b = document.createElement('button');
+    b.className = 'tab-btn' + (state.tab === t.id ? ' active' : '');
+    b.style.setProperty('--dot', t.color);
+    b.type = 'button';
+    b.innerHTML = '<span class="dot"></span><span>' + L(t.name) + '</span>';
+    b.addEventListener('click', function() { state.tab = t.id; renderTabs(); renderView(); });
+    tabsNav.appendChild(b);
+  });
+}
+
+function viewHeader(tabId) {
+  var t = TABS.filter(function(x){ return x.id === tabId; })[0];
+  var h = '<h2 class="view-title">' + L(t.name) + '</h2>';
+  h += '<p class="view-desc">' + L(UI.viewSubs[tabId]) + '</p>';
+  return h;
+}
+
+function renderView() {
+  var el = document.getElementById('siteTitle'); if (el) el.textContent = L(UI.title);
+  var sub = document.getElementById('siteSubtitle'); if (sub) sub.textContent = L(UI.subtitle);
+  document.getElementById('langBtn').textContent = L(UI.langSwitch);
+  document.documentElement.style.setProperty('--tab-accent', TAB_HEX[state.tab] || TAB_HEX.sci);
+
+  var html = '<section class="view active" id="viewActive">';
+  if (state.tab === 'sci') html += renderSci();
+  else if (state.tab === 'convert') html += renderConverter();
+  else if (state.tab === 'history') html += renderHistory();
+  else html += renderCategory(state.tab);
+  html += '</section>';
+  content.innerHTML = html;
+
+  if (state.tab === 'sci') bindSci();
+  else if (state.tab === 'convert') bindConverter();
+  else if (state.tab === 'history') bindHistory();
+  else bindCategory(state.tab);
+}
+
+/* ============================= SCIENTIFIC CALC VIEW ============================= */
+function renderSci() {
+  var h = viewHeader('sci');
+  h += '<div class="sci-wrap">';
+  h += '  <div class="sci-display">';
+  h += '    <div class="sci-preview" id="sciPreview">&nbsp;</div>';
+  h += '    <div class="sci-expr" id="sciExprEl">0</div>';
+  h += '  </div>';
+  h += '  <div class="sci-modes">';
+  h += '    <button class="mode-chip" id="chipDeg" type="button">DEG</button>';
+  h += '    <button class="mode-chip" id="chipRad" type="button">RAD</button>';
+  h += '    <button class="mode-chip" id="chipInv" type="button">' + L(UI.inv) + '</button>';
+  h += '    <button class="mode-chip" id="chipMem" type="button">M: <span id="memVal">0</span></button>';
+  h += '    <button class="mode-chip" id="chipCopy" type="button">📋 ' + (state.lang==='bn'?'কপি':'Copy') + '</button>';
+  h += '  </div>';
+  h += '  <div class="sci-grid" id="sciGrid"></div>';
+  h += '  <div class="sci-keypad" id="sciKeypad"></div>';
+  h += '</div>';
+  return h;
+}
+
+function sciFunctionRows() {
+  var trig1 = state.inv ? ['asin','acos','atan'] : ['sin','cos','tan'];
+  var trig1Label = state.inv ? ['sin⁻¹','cos⁻¹','tan⁻¹'] : ['sin','cos','tan'];
+  var logLabel = state.inv ? ['10^x','e^x'] : ['log','ln'];
+  var logInsert = state.inv ? ['10^(','e^('] : ['log(','ln('];
+
+  return [
+    [
+      {label:'MC', type:'mem', act:'MC'}, {label:'MR', type:'mem', act:'MR'},
+      {label:'M+', type:'mem', act:'M+'}, {label:'M-', type:'mem', act:'M-'},
+      {label:'AC', type:'ac'}
+    ],
+    [
+      {label: trig1Label[0], type:'ins', text: trig1[0] + '('},
+      {label: trig1Label[1], type:'ins', text: trig1[1] + '('},
+      {label: trig1Label[2], type:'ins', text: trig1[2] + '('},
+      {label: logLabel[0], type:'ins', text: logInsert[0]},
+      {label: logLabel[1], type:'ins', text: logInsert[1]}
+    ],
+    [
+      {label:'x²', type:'ins', text:'^2'},
+      {label:'√', type:'ins', text:'sqrt('},
+      {label:'x^y', type:'ins', text:'^'},
+      {label:'x!', type:'ins', text:'!'},
+      {label:'π', type:'ins', text:'pi'}
+    ],
+    [
+      {label:'nCr', type:'ins', text:'ncr('},
+      {label:'nPr', type:'ins', text:'npr('},
+      {label:'%', type:'ins', text:'%'},
+      {label:'e', type:'ins', text:'e'},
+      {label:'Ans', type:'ins', text:'ans'}
+    ],
+    [
+      {label:'(', type:'ins', text:'('}, {label:')', type:'ins', text:')'},
+      {label:',', type:'ins', text:','}, {label:'DEL', type:'del'},
+      {label:'±', type:'neg'}
+    ]
+  ];
+}
+
+/* Numbers on the left three columns, +/−/×/÷ and = fixed to the rightmost column. */
+function sciKeypadRows() {
+  return [
+    [
+      {label:'7', type:'ins', text:'7'}, {label:'8', type:'ins', text:'8'}, {label:'9', type:'ins', text:'9'},
+      {label:'÷', type:'ins', text:'/', cls:'op'}
+    ],
+    [
+      {label:'4', type:'ins', text:'4'}, {label:'5', type:'ins', text:'5'}, {label:'6', type:'ins', text:'6'},
+      {label:'×', type:'ins', text:'*', cls:'op'}
+    ],
+    [
+      {label:'1', type:'ins', text:'1'}, {label:'2', type:'ins', text:'2'}, {label:'3', type:'ins', text:'3'},
+      {label:'−', type:'ins', text:'-', cls:'op'}
+    ],
+    [
+      {label:'0', type:'ins', text:'0', cls:'wide2'}, {label:'.', type:'ins', text:'.'},
+      {label:'+', type:'ins', text:'+', cls:'op'}
+    ],
+    [
+      {label:'=', type:'eq', cls:'eq wide4'}
+    ]
+  ];
+}
+
+function bindSci() {
+  updateSciModeChips();
+  var grid = document.getElementById('sciGrid');
+  grid.innerHTML = '';
+  sciFunctionRows().forEach(function(row) {
+    row.forEach(function(btn) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = btn.label;
+      if (btn.cls) b.className = btn.cls;
+      if (btn.type === 'ins' && !btn.cls) b.className = 'fn';
+      b.addEventListener('click', function() { handleSciBtn(btn); });
+      grid.appendChild(b);
+    });
+  });
+  var keypad = document.getElementById('sciKeypad');
+  keypad.innerHTML = '';
+  sciKeypadRows().forEach(function(row) {
+    row.forEach(function(btn) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = btn.label;
+      if (btn.cls) b.className = btn.cls;
+      b.addEventListener('click', function() { handleSciBtn(btn); });
+      keypad.appendChild(b);
+    });
+  });
+  document.getElementById('chipDeg').addEventListener('click', function(){ state.angleMode='deg'; updateSciModeChips(); });
+  document.getElementById('chipRad').addEventListener('click', function(){ state.angleMode='rad'; updateSciModeChips(); });
+  document.getElementById('chipInv').addEventListener('click', function(){ state.inv = !state.inv; bindSci(); });
+  document.getElementById('chipCopy').addEventListener('click', function() {
+    var btn = this;
+    var text = state.sciExpr === '' ? '0' : state.sciExpr;
+    copyText(text, function() {
+      var original = '📋 ' + (state.lang==='bn'?'কপি':'Copy');
+      btn.textContent = '✓ ' + (state.lang==='bn'?'কপি হয়েছে':'Copied');
+      setTimeout(function(){ btn.textContent = original; }, 1400);
+    });
+  });
+  updateSciDisplay();
+}
+
+function updateSciModeChips() {
+  var d = document.getElementById('chipDeg'), r = document.getElementById('chipRad'), inv = document.getElementById('chipInv');
+  if (!d) return;
+  d.classList.toggle('on', state.angleMode === 'deg');
+  r.classList.toggle('on', state.angleMode === 'rad');
+  inv.classList.toggle('on', state.inv);
+  document.getElementById('memVal').textContent = fmt(state.memory, 6);
+}
+
+function handleSciBtn(btn) {
+  if (btn.type === 'ac') { state.sciExpr = ''; state.justEvaluated = false; updateSciDisplay(); return; }
+  if (btn.type === 'del') {
+    state.sciExpr = state.sciExpr.slice(0, -1);
+    state.justEvaluated = false;
+    updateSciDisplay();
+    return;
+  }
+  if (btn.type === 'neg') {
+    if (!state.sciExpr) return;
+    if (/^-\(.*\)$/.test(state.sciExpr)) state.sciExpr = state.sciExpr.slice(2, -1);
+    else state.sciExpr = '-(' + state.sciExpr + ')';
+    state.justEvaluated = false;
+    updateSciDisplay();
+    return;
+  }
+  if (btn.type === 'mem') {
+    var evalNow = evalExpr(state.sciExpr);
+    var cur = evalNow.error ? state.ans : evalNow.value;
+    if (btn.act === 'MC') state.memory = 0;
+    else if (btn.act === 'MR') { state.sciExpr += fmt(state.memory, 10); state.justEvaluated = false; }
+    else if (btn.act === 'M+') state.memory += cur;
+    else if (btn.act === 'M-') state.memory -= cur;
+    updateSciDisplay();
+    return;
+  }
+  if (btn.type === 'eq') {
+    var r = evalExpr(state.sciExpr);
+    if (r.error) {
+      document.getElementById('sciExprEl').textContent = state.lang === 'bn' ? 'ত্রুটি' : 'Error';
+      return;
+    }
+    state.ans = r.value;
+    var exprBefore = state.sciExpr;
+    state.sciExpr = fmt(r.value, 10);
+    state.justEvaluated = true;
+    updateSciDisplay();
+    pushHistory('sci', state.lang==='bn' ? 'বৈজ্ঞানিক' : 'Scientific', exprBefore + ' =', fmt(r.value, 10));
+    return;
+  }
+  if (btn.type === 'ins') {
+    var isDigit = /^[0-9.]$/.test(btn.text);
+    if (state.justEvaluated) {
+      if (isDigit) state.sciExpr = '';
+      state.justEvaluated = false;
+    }
+    state.sciExpr += btn.text;
+    updateSciDisplay();
+  }
+}
+
+function updateSciDisplay() {
+  var exprEl = document.getElementById('sciExprEl');
+  var prevEl = document.getElementById('sciPreview');
+  if (!exprEl) return;
+  exprEl.textContent = state.sciExpr === '' ? '0' : state.sciExpr;
+  var r = evalExpr(state.sciExpr);
+  if (!r.error && state.sciExpr.trim() !== '' && fmt(r.value,10) !== state.sciExpr) {
+    prevEl.textContent = '= ' + fmt(r.value, 10);
+  } else {
+    prevEl.innerHTML = '&nbsp;';
+  }
+  var mv = document.getElementById('memVal'); if (mv) mv.textContent = fmt(state.memory, 6);
+}
+
+/* ============================= UNIT CONVERTER ============================= */
+var UNIT_CATS = {
+  length: {
+    name: {bn:'দৈর্ঘ্য', en:'Length'}, base: 'm',
+    units: {
+      mm: {n:{bn:'মিলিমিটার (mm)', en:'Millimeter (mm)'}, f:0.001},
+      cm: {n:{bn:'সেন্টিমিটার (cm)', en:'Centimeter (cm)'}, f:0.01},
+      m: {n:{bn:'মিটার (m)', en:'Meter (m)'}, f:1},
+      km: {n:{bn:'কিলোমিটার (km)', en:'Kilometer (km)'}, f:1000},
+      inch: {n:{bn:'ইঞ্চি (in)', en:'Inch (in)'}, f:0.0254},
+      foot: {n:{bn:'ফুট (ft)', en:'Foot (ft)'}, f:0.3048},
+      yard: {n:{bn:'গজ (yd)', en:'Yard (yd)'}, f:0.9144},
+      mile: {n:{bn:'মাইল (mi)', en:'Mile (mi)'}, f:1609.344}
+    }
+  },
+  mass: {
+    name: {bn:'ওজন/ভর', en:'Weight / Mass'}, base:'kg',
+    units: {
+      mg: {n:{bn:'মিলিগ্রাম (mg)', en:'Milligram (mg)'}, f:0.000001},
+      g: {n:{bn:'গ্রাম (g)', en:'Gram (g)'}, f:0.001},
+      kg: {n:{bn:'কিলোগ্রাম (kg)', en:'Kilogram (kg)'}, f:1},
+      tonne: {n:{bn:'টন', en:'Tonne'}, f:1000},
+      ounce: {n:{bn:'আউন্স (oz)', en:'Ounce (oz)'}, f:0.0283495},
+      pound: {n:{bn:'পাউন্ড (lb)', en:'Pound (lb)'}, f:0.453592},
+      maund: {n:{bn:'মণ', en:'Maund'}, f:37.3242}
+    }
+  },
+  temperature: {
+    name: {bn:'তাপমাত্রা', en:'Temperature'}, base:'special',
+    units: {
+      c: {n:{bn:'সেলসিয়াস (°C)', en:'Celsius (°C)'}},
+      f: {n:{bn:'ফারেনহাইট (°F)', en:'Fahrenheit (°F)'}},
+      k: {n:{bn:'কেলভিন (K)', en:'Kelvin (K)'}}
+    }
+  },
+  area: {
+    name: {bn:'ক্ষেত্রফল', en:'Area'}, base:'m2',
+    units: {
+      sqcm: {n:{bn:'বর্গ সেমি', en:'sq. cm'}, f:0.0001},
+      sqm: {n:{bn:'বর্গ মিটার', en:'sq. m'}, f:1},
+      hectare: {n:{bn:'হেক্টর', en:'Hectare'}, f:10000},
+      sqkm: {n:{bn:'বর্গ কিমি', en:'sq. km'}, f:1000000},
+      acre: {n:{bn:'একর', en:'Acre'}, f:4046.8564224},
+      bigha: {n:{bn:'বিঘা', en:'Bigha'}, f:1338.29},
+      sqft: {n:{bn:'বর্গফুট', en:'sq. ft'}, f:0.09290304}
+    }
+  },
+  volume: {
+    name: {bn:'আয়তন', en:'Volume'}, base:'L',
+    units: {
+      ml: {n:{bn:'মিলিলিটার (mL)', en:'Milliliter (mL)'}, f:0.001},
+      l: {n:{bn:'লিটার (L)', en:'Liter (L)'}, f:1},
+      m3: {n:{bn:'ঘন মিটার', en:'Cubic meter'}, f:1000},
+      gallon: {n:{bn:'গ্যালন (US)', en:'Gallon (US)'}, f:3.78541},
+      cup: {n:{bn:'কাপ', en:'Cup'}, f:0.24},
+      cubicft: {n:{bn:'ঘন ফুট', en:'Cubic foot'}, f:28.3168}
+    }
+  },
+  time: {
+    name: {bn:'সময়', en:'Time'}, base:'s',
+    units: {
+      sec: {n:{bn:'সেকেন্ড', en:'Second'}, f:1},
+      min: {n:{bn:'মিনিট', en:'Minute'}, f:60},
+      hour: {n:{bn:'ঘণ্টা', en:'Hour'}, f:3600},
+      day: {n:{bn:'দিন', en:'Day'}, f:86400},
+      week: {n:{bn:'সপ্তাহ', en:'Week'}, f:604800},
+      month: {n:{bn:'মাস (গড়)', en:'Month (avg)'}, f:2629800},
+      year: {n:{bn:'বছর', en:'Year'}, f:31557600}
+    }
+  },
+  speed: {
+    name: {bn:'গতি', en:'Speed'}, base:'mps',
+    units: {
+      mps: {n:{bn:'মিটার/সেকেন্ড', en:'m/s'}, f:1},
+      kmph: {n:{bn:'কিমি/ঘণ্টা', en:'km/h'}, f:0.277778},
+      mph: {n:{bn:'মাইল/ঘণ্টা', en:'mph'}, f:0.44704},
+      knot: {n:{bn:'নট', en:'Knot'}, f:0.514444}
+    }
+  },
+  data: {
+    name: {bn:'ডেটা', en:'Data Storage'}, base:'byte',
+    units: {
+      bit: {n:{bn:'বিট', en:'Bit'}, f:0.125},
+      byte: {n:{bn:'বাইট', en:'Byte'}, f:1},
+      kb: {n:{bn:'কিলোবাইট (KB)', en:'Kilobyte (KB)'}, f:1024},
+      mb: {n:{bn:'মেগাবাইট (MB)', en:'Megabyte (MB)'}, f:1048576},
+      gb: {n:{bn:'গিগাবাইট (GB)', en:'Gigabyte (GB)'}, f:1073741824},
+      tb: {n:{bn:'টেরাবাইট (TB)', en:'Terabyte (TB)'}, f:1099511627776}
+    }
+  },
+  angle: {
+    name: {bn:'কোণ', en:'Angle'}, base:'rad',
+    units: {
+      deg: {n:{bn:'ডিগ্রি (°)', en:'Degree (°)'}, f:0.0174533},
+      rad: {n:{bn:'রেডিয়ান', en:'Radian'}, f:1},
+      grad: {n:{bn:'গ্রেডিয়ান', en:'Gradian'}, f:0.015708}
+    }
+  },
+  pressure: {
+    name: {bn:'চাপ', en:'Pressure'}, base:'pa',
+    units: {
+      pa: {n:{bn:'প্যাসকেল (Pa)', en:'Pascal (Pa)'}, f:1},
+      kpa: {n:{bn:'কিলোপ্যাসকেল (kPa)', en:'Kilopascal (kPa)'}, f:1000},
+      bar: {n:{bn:'বার', en:'Bar'}, f:100000},
+      atm: {n:{bn:'অ্যাটমোস্ফিয়ার (atm)', en:'Atmosphere (atm)'}, f:101325},
+      psi: {n:{bn:'পিএসআই (psi)', en:'PSI'}, f:6894.76}
+    }
+  },
+  energy: {
+    name: {bn:'শক্তি', en:'Energy'}, base:'J',
+    units: {
+      j: {n:{bn:'জুল (J)', en:'Joule (J)'}, f:1},
+      kj: {n:{bn:'কিলোজুল (kJ)', en:'Kilojoule (kJ)'}, f:1000},
+      cal: {n:{bn:'ক্যালরি (cal)', en:'Calorie (cal)'}, f:4.184},
+      kcal: {n:{bn:'কিলোক্যালরি (kcal)', en:'Kilocalorie (kcal)'}, f:4184},
+      wh: {n:{bn:'ওয়াট-ঘণ্টা (Wh)', en:'Watt-hour (Wh)'}, f:3600},
+      kwh: {n:{bn:'কিলোওয়াট-ঘণ্টা (kWh)', en:'Kilowatt-hour (kWh)'}, f:3600000}
+    }
+  }
+};
+var convState = {cat:'length', from:'', to:''};
+
+function toKelvin(v,u){ if(u==='c') return v+273.15; if(u==='f') return (v-32)*5/9+273.15; return v; }
+function fromKelvin(k,u){ if(u==='c') return k-273.15; if(u==='f') return (k-273.15)*9/5+32; return k; }
+
+function renderConverter() {
+  var h = viewHeader('convert');
+  h += '<select class="conv-cat-select" id="convCat">';
+  Object.keys(UNIT_CATS).forEach(function(key) {
+    h += '<option value="' + key + '"' + (key===convState.cat?' selected':'') + '>' + L(UNIT_CATS[key].name) + '</option>';
+  });
+  h += '</select>';
+  h += '<div class="conv-row">';
+  h += '  <div class="conv-col"><label>' + L(UI.from) + '</label><select id="convFrom"></select></div>';
+  h += '  <button class="conv-swap" id="convSwap" type="button" aria-label="swap">⇄</button>';
+  h += '  <div class="conv-col"><label>' + L(UI.to) + '</label><select id="convTo"></select></div>';
+  h += '</div>';
+  h += '<div class="conv-row">';
+  h += '  <div class="conv-col"><label>' + (state.lang==='bn'?'মান':'Value') + '</label><input type="number" inputmode="decimal" id="convVal" value="1"></div>';
+  h += '</div>';
+  h += '<div class="conv-result" id="convResult">—</div>';
+  return h;
+}
+
+function populateConvUnitSelects() {
+  var cat = UNIT_CATS[convState.cat];
+  var keys = Object.keys(cat.units);
+  if (!convState.from || !cat.units[convState.from]) convState.from = keys[0];
+  if (!convState.to || !cat.units[convState.to]) convState.to = keys[1] || keys[0];
+  var fromSel = document.getElementById('convFrom'), toSel = document.getElementById('convTo');
+  fromSel.innerHTML = ''; toSel.innerHTML = '';
+  keys.forEach(function(k) {
+    var o1 = document.createElement('option'); o1.value = k; o1.textContent = L(cat.units[k].n); if (k===convState.from) o1.selected = true;
+    fromSel.appendChild(o1);
+    var o2 = document.createElement('option'); o2.value = k; o2.textContent = L(cat.units[k].n); if (k===convState.to) o2.selected = true;
+    toSel.appendChild(o2);
+  });
+}
+
+function computeConversion() {
+  var cat = UNIT_CATS[convState.cat];
+  var valEl = document.getElementById('convVal');
+  var v = parseFloat(valEl.value);
+  var resEl = document.getElementById('convResult');
+  if (!isNum(valEl.value)) { resEl.textContent = L(UI.invalidInput); return; }
+  var result;
+  if (convState.cat === 'temperature') {
+    result = fromKelvin(toKelvin(v, convState.from), convState.to);
+  } else {
+    var base = v * cat.units[convState.from].f;
+    result = base / cat.units[convState.to].f;
+  }
+  resEl.textContent = fmt(v, 8) + ' ' + L(cat.units[convState.from].n) + '  =  ' + fmt(result, 8) + ' ' + L(cat.units[convState.to].n);
+  var summary = fmt(v,8) + ' ' + convState.from + ' = ' + fmt(result,8) + ' ' + convState.to;
+  return summary;
+}
+
+function bindConverter() {
+  populateConvUnitSelects();
+  computeConversion();
+  document.getElementById('convCat').addEventListener('change', function(e) {
+    convState.cat = e.target.value; convState.from = ''; convState.to = '';
+    populateConvUnitSelects(); computeConversion();
+  });
+  document.getElementById('convFrom').addEventListener('change', function(e){ convState.from = e.target.value; computeConversion(); });
+  document.getElementById('convTo').addEventListener('change', function(e){ convState.to = e.target.value; computeConversion(); });
+  document.getElementById('convSwap').addEventListener('click', function() {
+    var t = convState.from; convState.from = convState.to; convState.to = t;
+    populateConvUnitSelects(); computeConversion();
+  });
+  var valEl = document.getElementById('convVal');
+  var lastLogged = null;
+  valEl.addEventListener('input', function(){ computeConversion(); });
+  valEl.addEventListener('change', function() {
+    var summary = computeConversion();
+    if (summary && summary !== lastLogged) {
+      lastLogged = summary;
+      pushHistory('convert', L(UNIT_CATS[convState.cat].name), summary, '');
+    }
+  });
+  ['convFrom','convTo','convCat'].forEach(function(id) {
+    document.getElementById(id).addEventListener('change', function() {
+      var summary = computeConversion();
+      if (summary) pushHistory('convert', L(UNIT_CATS[convState.cat].name), summary, '');
+    });
+  });
+}
+
+/* ============================= PERIODIC TABLE ============================= */
+var PT_RAW = [
+  [1,'H','Hydrogen','হাইড্রোজেন',1.008],[2,'He','Helium','হিলিয়াম',4.003],
+  [3,'Li','Lithium','লিথিয়াম',6.94],[4,'Be','Beryllium','বেরিলিয়াম',9.012],
+  [5,'B','Boron','বোরন',10.81],[6,'C','Carbon','কার্বন',12.011],
+  [7,'N','Nitrogen','নাইট্রোজেন',14.007],[8,'O','Oxygen','অক্সিজেন',15.999],
+  [9,'F','Fluorine','ফ্লুরিন',18.998],[10,'Ne','Neon','নিয়ন',20.180],
+  [11,'Na','Sodium','সোডিয়াম',22.990],[12,'Mg','Magnesium','ম্যাগনেসিয়াম',24.305],
+  [13,'Al','Aluminium','অ্যালুমিনিয়াম',26.982],[14,'Si','Silicon','সিলিকন',28.085],
+  [15,'P','Phosphorus','ফসফরাস',30.974],[16,'S','Sulfur','সালফার (গন্ধক)',32.06],
+  [17,'Cl','Chlorine','ক্লোরিন',35.45],[18,'Ar','Argon','আর্গন',39.948],
+  [19,'K','Potassium','পটাশিয়াম',39.098],[20,'Ca','Calcium','ক্যালসিয়াম',40.078],
+  [21,'Sc','Scandium','স্ক্যান্ডিয়াম',44.956],[22,'Ti','Titanium','টাইটানিয়াম',47.867],
+  [23,'V','Vanadium','ভ্যানাডিয়াম',50.942],[24,'Cr','Chromium','ক্রোমিয়াম',51.996],
+  [25,'Mn','Manganese','ম্যাঙ্গানিজ',54.938],[26,'Fe','Iron','লোহা (আয়রন)',55.845],
+  [27,'Co','Cobalt','কোবাল্ট',58.933],[28,'Ni','Nickel','নিকেল',58.693],
+  [29,'Cu','Copper','কপার (তামা)',63.546],[30,'Zn','Zinc','জিঙ্ক (দস্তা)',65.38],
+  [31,'Ga','Gallium','গ্যালিয়াম',69.723],[32,'Ge','Germanium','জার্মেনিয়াম',72.630],
+  [33,'As','Arsenic','আর্সেনিক',74.922],[34,'Se','Selenium','সেলেনিয়াম',78.971],
+  [35,'Br','Bromine','ব্রোমিন',79.904],[36,'Kr','Krypton','ক্রিপ্টন',83.798],
+  [37,'Rb','Rubidium','রুবিডিয়াম',85.468],[38,'Sr','Strontium','স্ট্রনসিয়াম',87.62],
+  [39,'Y','Yttrium','ইট্রিয়াম',88.906],[40,'Zr','Zirconium','জিরকোনিয়াম',91.224],
+  [41,'Nb','Niobium','নিওবিয়াম',92.906],[42,'Mo','Molybdenum','মলিবডেনাম',95.95],
+  [43,'Tc','Technetium','টেকনেসিয়াম',98],[44,'Ru','Ruthenium','রুথেনিয়াম',101.07],
+  [45,'Rh','Rhodium','রোডিয়াম',102.906],[46,'Pd','Palladium','প্যালাডিয়াম',106.42],
+  [47,'Ag','Silver','সিলভার (রূপা)',107.868],[48,'Cd','Cadmium','ক্যাডমিয়াম',112.414],
+  [49,'In','Indium','ইন্ডিয়াম',114.818],[50,'Sn','Tin','টিন',118.710],
+  [51,'Sb','Antimony','অ্যান্টিমনি',121.760],[52,'Te','Tellurium','টেলুরিয়াম',127.60],
+  [53,'I','Iodine','আয়োডিন',126.904],[54,'Xe','Xenon','জেনন',131.293],
+  [55,'Cs','Caesium','সিজিয়াম',132.905],[56,'Ba','Barium','বেরিয়াম',137.327],
+  [57,'La','Lanthanum','ল্যান্থানাম',138.905],[58,'Ce','Cerium','সেরিয়াম',140.116],
+  [59,'Pr','Praseodymium','প্রাসিওডিমিয়াম',140.908],[60,'Nd','Neodymium','নিওডিমিয়াম',144.242],
+  [61,'Pm','Promethium','প্রোমিথিয়াম',145],[62,'Sm','Samarium','সামারিয়াম',150.36],
+  [63,'Eu','Europium','ইউরোপিয়াম',151.964],[64,'Gd','Gadolinium','গ্যাডোলিনিয়াম',157.25],
+  [65,'Tb','Terbium','টারবিয়াম',158.925],[66,'Dy','Dysprosium','ডিসপ্রোসিয়াম',162.500],
+  [67,'Ho','Holmium','হলমিয়াম',164.930],[68,'Er','Erbium','এরবিয়াম',167.259],
+  [69,'Tm','Thulium','থুলিয়াম',168.934],[70,'Yb','Ytterbium','ইটারবিয়াম',173.045],
+  [71,'Lu','Lutetium','লুটেসিয়াম',174.967],[72,'Hf','Hafnium','হাফনিয়াম',178.49],
+  [73,'Ta','Tantalum','ট্যান্টালাম',180.948],[74,'W','Tungsten','টাংস্টেন',183.84],
+  [75,'Re','Rhenium','রেনিয়াম',186.207],[76,'Os','Osmium','অসমিয়াম',190.23],
+  [77,'Ir','Iridium','ইরিডিয়াম',192.217],[78,'Pt','Platinum','প্লাটিনাম',195.084],
+  [79,'Au','Gold','গোল্ড (স্বর্ণ)',196.967],[80,'Hg','Mercury','মার্কারি (পারদ)',200.592],
+  [81,'Tl','Thallium','থ্যালিয়াম',204.383],[82,'Pb','Lead','লেড (সীসা)',207.2],
+  [83,'Bi','Bismuth','বিসমাথ',208.980],[84,'Po','Polonium','পোলোনিয়াম',209],
+  [85,'At','Astatine','অ্যাস্টাটিন',210],[86,'Rn','Radon','রেডন',222],
+  [87,'Fr','Francium','ফ্রান্সিয়াম',223],[88,'Ra','Radium','রেডিয়াম',226],
+  [89,'Ac','Actinium','অ্যাক্টিনিয়াম',227],[90,'Th','Thorium','থোরিয়াম',232.038],
+  [91,'Pa','Protactinium','প্রোট্যাক্টিনিয়াম',231.036],[92,'U','Uranium','ইউরেনিয়াম',238.029],
+  [93,'Np','Neptunium','নেপচুনিয়াম',237],[94,'Pu','Plutonium','প্লুটোনিয়াম',244],
+  [95,'Am','Americium','আমেরিসিয়াম',243],[96,'Cm','Curium','কুরিয়াম',247],
+  [97,'Bk','Berkelium','বার্কেলিয়াম',247],[98,'Cf','Californium','ক্যালিফোর্নিয়াম',251],
+  [99,'Es','Einsteinium','আইনস্টাইনিয়াম',252],[100,'Fm','Fermium','ফার্মিয়াম',257],
+  [101,'Md','Mendelevium','মেন্ডেলিভিয়াম',258],[102,'No','Nobelium','নোবেলিয়াম',259],
+  [103,'Lr','Lawrencium','লরেনসিয়াম',266],[104,'Rf','Rutherfordium','রাদারফোর্ডিয়াম',267],
+  [105,'Db','Dubnium','ডুবনিয়াম',268],[106,'Sg','Seaborgium','সিবোর্গিয়াম',269],
+  [107,'Bh','Bohrium','বোহরিয়াম',270],[108,'Hs','Hassium','হ্যাসিয়াম',269],
+  [109,'Mt','Meitnerium','মাইটনেরিয়াম',278],[110,'Ds','Darmstadtium','ডার্মস্টাটিয়াম',281],
+  [111,'Rg','Roentgenium','রন্টজেনিয়াম',282],[112,'Cn','Copernicium','কোপার্নিসিয়াম',285],
+  [113,'Nh','Nihonium','নিহোনিয়াম',286],[114,'Fl','Flerovium','ফ্লেরোভিয়াম',289],
+  [115,'Mc','Moscovium','মস্কোভিয়াম',290],[116,'Lv','Livermorium','লিভারমোরিয়াম',293],
+  [117,'Ts','Tennessine','টেনেসিন',294],[118,'Og','Oganesson','ওগানেসন',294]
+];
+var CAT_NOBLE = [2,10,18,36,54,86,118];
+var CAT_HALOGEN = [9,17,35,53,85,117];
+var CAT_NONMETAL = [1,6,7,8,15,16,34];
+var CAT_METALLOID = [5,14,32,33,51,52];
+function elementCategory(z) {
+  if (CAT_NOBLE.indexOf(z) !== -1) return 'noble';
+  if (CAT_HALOGEN.indexOf(z) !== -1) return 'halogen';
+  if (CAT_NONMETAL.indexOf(z) !== -1) return 'nonmetal';
+  if (CAT_METALLOID.indexOf(z) !== -1) return 'metalloid';
+  return 'metal';
+}
+var CAT_LABELS = {
+  metal: {bn:'ধাতু', en:'Metal'},
+  metalloid: {bn:'ধাতুকল্প', en:'Metalloid'},
+  nonmetal: {bn:'অধাতু', en:'Nonmetal'},
+  halogen: {bn:'হ্যালোজেন', en:'Halogen'},
+  noble: {bn:'নিষ্ক্রিয় গ্যাস', en:'Noble gas'}
+};
+var PERIODIC_TABLE = PT_RAW.map(function(r) {
+  return {z:r[0], sym:r[1], en:r[2], bn:r[3], mass:r[4], cat:elementCategory(r[0])};
+});
+var PT_BY_SYMBOL = {};
+PERIODIC_TABLE.forEach(function(e){ PT_BY_SYMBOL[e.sym] = e; });
+
+/* ---- chemical formula parser (handles nested parentheses, e.g. Ca(OH)2, Al2(SO4)3) ---- */
+function parseFormula(str) {
+  str = (str || '').replace(/\s+/g, '');
+  if (!str) return {error: 'empty'};
+  var i = 0;
+  function parseNumber() {
+    var start = i;
+    while (i < str.length && /[0-9]/.test(str[i])) i++;
+    if (i === start) return 1;
+    return parseInt(str.slice(start, i), 10);
+  }
+  function parseGroup() {
+    var counts = {};
+    while (i < str.length && str[i] !== ')') {
+      if (str[i] === '(') {
+        i++;
+        var sub = parseGroup();
+        if (i < str.length && str[i] === ')') i++; else throw new Error('paren');
+        var mult = parseNumber();
+        Object.keys(sub).forEach(function(k) { counts[k] = (counts[k] || 0) + sub[k] * mult; });
+      } else if (/[A-Z]/.test(str[i])) {
+        var two = str.slice(i, i + 2);
+        var sym;
+        if (two.length === 2 && /[a-z]/.test(two[1]) && PT_BY_SYMBOL[two]) { sym = two; i += 2; }
+        else if (PT_BY_SYMBOL[str[i]]) { sym = str[i]; i += 1; }
+        else throw new Error('unknown element: ' + str[i]);
+        var n = parseNumber();
+        counts[sym] = (counts[sym] || 0) + n;
+      } else {
+        throw new Error('unexpected char: ' + str[i]);
+      }
+    }
+    return counts;
+  }
+  try {
+    var counts = parseGroup();
+    if (i !== str.length) return {error: 'trailing'};
+    var totalMass = 0;
+    var rows = Object.keys(counts).map(function(sym) {
+      var el = PT_BY_SYMBOL[sym];
+      var subtotal = el.mass * counts[sym];
+      totalMass += subtotal;
+      return {sym: sym, count: counts[sym], mass: el.mass, subtotal: subtotal, el: el};
+    });
+    return {counts: counts, rows: rows, totalMass: totalMass};
+  } catch (e) {
+    return {error: e.message};
+  }
+}
+
+var COMPOUNDS = [
+  {f:'H2O', bn:'পানি', en:'Water'},
+  {f:'CO2', bn:'কার্বন ডাই-অক্সাইড', en:'Carbon dioxide'},
+  {f:'NaCl', bn:'সোডিয়াম ক্লোরাইড (লবণ)', en:'Sodium chloride (salt)'},
+  {f:'H2SO4', bn:'সালফিউরিক অ্যাসিড', en:'Sulfuric acid'},
+  {f:'HCl', bn:'হাইড্রোক্লোরিক অ্যাসিড', en:'Hydrochloric acid'},
+  {f:'NaOH', bn:'সোডিয়াম হাইড্রক্সাইড', en:'Sodium hydroxide'},
+  {f:'NH3', bn:'অ্যামোনিয়া', en:'Ammonia'},
+  {f:'CaCO3', bn:'ক্যালসিয়াম কার্বনেট (চুনাপাথর)', en:'Calcium carbonate (limestone)'},
+  {f:'CaO', bn:'ক্যালসিয়াম অক্সাইড (কলিচুন)', en:'Calcium oxide (quicklime)'},
+  {f:'Ca(OH)2', bn:'ক্যালসিয়াম হাইড্রক্সাইড', en:'Calcium hydroxide'},
+  {f:'C6H12O6', bn:'গ্লুকোজ', en:'Glucose'},
+  {f:'C12H22O11', bn:'সুক্রোজ (চিনি)', en:'Sucrose (table sugar)'},
+  {f:'CH4', bn:'মিথেন', en:'Methane'},
+  {f:'C2H6O', bn:'ইথানল', en:'Ethanol'},
+  {f:'C2H4O2', bn:'অ্যাসিটিক অ্যাসিড (ভিনেগার)', en:'Acetic acid (vinegar)'},
+  {f:'HNO3', bn:'নাইট্রিক অ্যাসিড', en:'Nitric acid'},
+  {f:'KMnO4', bn:'পটাশিয়াম পারম্যাঙ্গানেট', en:'Potassium permanganate'},
+  {f:'NaHCO3', bn:'সোডিয়াম বাইকার্বনেট (খাবার সোডা)', en:'Sodium bicarbonate (baking soda)'},
+  {f:'NH4Cl', bn:'অ্যামোনিয়াম ক্লোরাইড', en:'Ammonium chloride'},
+  {f:'MgSO4', bn:'ম্যাগনেসিয়াম সালফেট', en:'Magnesium sulfate'},
+  {f:'CuSO4', bn:'কপার সালফেট', en:'Copper sulfate'},
+  {f:'ZnO', bn:'জিঙ্ক অক্সাইড', en:'Zinc oxide'},
+  {f:'AgNO3', bn:'সিলভার নাইট্রেট', en:'Silver nitrate'},
+  {f:'KNO3', bn:'পটাশিয়াম নাইট্রেট', en:'Potassium nitrate'},
+  {f:'Na2CO3', bn:'সোডিয়াম কার্বনেট', en:'Sodium carbonate'},
+  {f:'H2O2', bn:'হাইড্রোজেন পারঅক্সাইড', en:'Hydrogen peroxide'},
+  {f:'NO2', bn:'নাইট্রোজেন ডাই-অক্সাইড', en:'Nitrogen dioxide'},
+  {f:'SO2', bn:'সালফার ডাই-অক্সাইড', en:'Sulfur dioxide'},
+  {f:'O3', bn:'ওজোন', en:'Ozone'},
+  {f:'C6H6', bn:'বেনজিন', en:'Benzene'},
+  {f:'CH4N2O', bn:'ইউরিয়া', en:'Urea'},
+  {f:'NH4NO3', bn:'অ্যামোনিয়াম নাইট্রেট', en:'Ammonium nitrate'},
+  {f:'H3PO4', bn:'ফসফরিক অ্যাসিড', en:'Phosphoric acid'},
+  {f:'Al2O3', bn:'অ্যালুমিনিয়াম অক্সাইড', en:'Aluminium oxide'},
+  {f:'Fe2O3', bn:'আয়রন(III) অক্সাইড (মরিচা)', en:'Iron(III) oxide (rust)'},
+  {f:'KCl', bn:'পটাশিয়াম ক্লোরাইড', en:'Potassium chloride'},
+  {f:'CaCl2', bn:'ক্যালসিয়াম ক্লোরাইড', en:'Calcium chloride'},
+  {f:'Na2SO4', bn:'সোডিয়াম সালফেট', en:'Sodium sulfate'},
+  {f:'Al2(SO4)3', bn:'অ্যালুমিনিয়াম সালফেট', en:'Aluminium sulfate'},
+  {f:'(NH4)2SO4', bn:'অ্যামোনিয়াম সালফেট', en:'Ammonium sulfate'}
+];
+COMPOUNDS.forEach(function(c) { var r = parseFormula(c.f); c.mass = r.error ? NaN : r.totalMass; });
+
+/* ============================= DOMAIN CALCULATORS DATA ============================= */
+function field(id, labelBn, labelEn, type, extra) {
+  var f = {id:id, label:{bn:labelBn, en:labelEn}, type:type || 'number'};
+  if (extra) Object.assign(f, extra);
+  return f;
+}
+function line(labelBn, labelEn, value) { return {label:{bn:labelBn, en:labelEn}, value:value}; }
+
+var CALCS = {};
+
+/* ---------------- MATH ---------------- */
+CALCS.math = [
+  {
+    id:'pct-of', accent:'var(--c-math)',
+    name:{bn:'শতকরা হিসাব', en:'Percentage of a Value'},
+    desc:{bn:'কোনো মানের নির্দিষ্ট শতাংশ কত হবে তা বের করুন।', en:'Find what a given percentage of a value equals.'},
+    fields:[ field('pct','শতাংশ (%)','Percent (%)'), field('val','মান','Value') ],
+    compute:function(v){
+      if(!isNum(v.pct)||!isNum(v.val)) fail('সঠিক সংখ্যা দিন','Enter valid numbers');
+      var r = num(v.pct)*num(v.val)/100;
+      return [line('ফলাফল','Result', fmt(r))];
+    }
+  },
+  {
+    id:'pct-change', accent:'var(--c-math)',
+    name:{bn:'শতকরা পরিবর্তন', en:'Percentage Change'},
+    desc:{bn:'পুরাতন ও নতুন মানের মধ্যে শতকরা বৃদ্ধি বা হ্রাস বের করুন।', en:'Find the percentage increase or decrease between two values.'},
+    fields:[ field('old','পুরাতন মান','Old value'), field('nw','নতুন মান','New value') ],
+    compute:function(v){
+      if(!isNum(v.old)||!isNum(v.nw)) fail('সঠিক সংখ্যা দিন','Enter valid numbers');
+      if(num(v.old)===0) fail('পুরাতন মান শূন্য হতে পারবে না','Old value cannot be zero');
+      var change = (num(v.nw)-num(v.old))/Math.abs(num(v.old))*100;
+      return [line(change>=0?'বৃদ্ধি':'হ্রাস', change>=0?'Increase':'Decrease', fmt(Math.abs(change))+'%')];
+    }
+  },
+  {
+    id:'stats', accent:'var(--c-math)',
+    name:{bn:'পরিসংখ্যান (গড়, মধ্যক, ইত্যাদি)', en:'Statistics (Mean, Median...)'},
+    desc:{bn:'কমা দিয়ে সংখ্যাগুলো লিখুন। যেমন: 4, 8, 6, 5, 3', en:'Enter numbers separated by commas, e.g. 4, 8, 6, 5, 3'},
+    fields:[ field('list','সংখ্যাসমূহ','Numbers', 'list') ],
+    compute:function(v){
+      var arr = (v.list||'').split(/[,\s]+/).filter(function(x){return x!=='';}).map(Number);
+      if(!arr.length || arr.some(isNaN)) fail('সঠিক সংখ্যার তালিকা দিন','Enter a valid list of numbers');
+      var sum = arr.reduce(function(a,b){return a+b;},0);
+      var mean = sum/arr.length;
+      var sorted = arr.slice().sort(function(a,b){return a-b;});
+      var mid = Math.floor(sorted.length/2);
+      var median = sorted.length%2 ? sorted[mid] : (sorted[mid-1]+sorted[mid])/2;
+      var freq = {}; arr.forEach(function(x){ freq[x]=(freq[x]||0)+1; });
+      var maxFreq = Math.max.apply(null, Object.values(freq));
+      var modes = Object.keys(freq).filter(function(k){return freq[k]===maxFreq;});
+      var variance = arr.reduce(function(a,b){return a+Math.pow(b-mean,2);},0)/arr.length;
+      var std = Math.sqrt(variance);
+      return [
+        line('সংখ্যার পরিমাণ','Count', arr.length),
+        line('যোগফল','Sum', fmt(sum)),
+        line('গড় (Mean)','Mean', fmt(mean)),
+        line('মধ্যক (Median)','Median', fmt(median)),
+        line('প্রচুরক (Mode)','Mode', maxFreq>1 ? modes.join(', ') : (state.lang==='bn'?'নেই':'None')),
+        line('আদর্শ বিচ্যুতি','Std. Deviation', fmt(std))
+      ];
+    }
+  },
+  {
+    id:'quad', accent:'var(--c-math)',
+    name:{bn:'দ্বিঘাত সমীকরণ সমাধান', en:'Quadratic Equation Solver'},
+    desc:{bn:'ax² + bx + c = 0 রূপের সমীকরণের মূল বের করুন।', en:'Solve ax² + bx + c = 0 for x.'},
+    fields:[ field('a','a'), field('b','b'), field('c','c') ],
+    compute:function(v){
+      if(!isNum(v.a)||!isNum(v.b)||!isNum(v.c)) fail('সঠিক সংখ্যা দিন','Enter valid numbers');
+      var a=num(v.a), b=num(v.b), c=num(v.c);
+      if(a===0) fail('a শূন্য হতে পারবে না (এটি দ্বিঘাত নয়)','a cannot be zero (not quadratic)');
+      var d = b*b-4*a*c;
+      if (d>0) {
+        var x1=(-b+Math.sqrt(d))/(2*a), x2=(-b-Math.sqrt(d))/(2*a);
+        return [line('বিচারক (Δ)','Discriminant', fmt(d)), line('x₁', 'x₁', fmt(x1)), line('x₂','x₂', fmt(x2))];
+      } else if (d===0) {
+        var x=-b/(2*a);
+        return [line('বিচারক (Δ)','Discriminant', fmt(d)), line('x (একক মূল)','x (repeated root)', fmt(x))];
+      } else {
+        var re=-b/(2*a), im=Math.sqrt(-d)/(2*a);
+        return [line('বিচারক (Δ)','Discriminant', fmt(d)), line('মূল (জটিল)','Roots (complex)', fmt(re)+' ± '+fmt(im)+'i')];
+      }
+    }
+  },
+  {
+    id:'gcdlcm', accent:'var(--c-math)',
+    name:{bn:'গ.সা.গু ও ল.সা.গু', en:'GCD & LCM'},
+    desc:{bn:'দুই বা তার বেশি সংখ্যার গরিষ্ঠ সাধারণ গুণনীয়ক ও লঘিষ্ঠ সাধারণ গুণিতক। কমা দিয়ে সংখ্যাগুলো লিখুন, যেমন: 12, 18, 30', en:'Greatest common divisor and least common multiple of two or more integers. Enter numbers separated by commas, e.g. 12, 18, 30'},
+    fields:[ field('list','সংখ্যাসমূহ','Numbers', 'list') ],
+    compute:function(v){
+      var arr = (v.list||'').split(/[,\s]+/).filter(function(x){return x!=='';}).map(Number);
+      if(arr.length < 2 || arr.some(isNaN)) fail('অন্তত দুইটি সঠিক সংখ্যা দিন','Enter at least two valid numbers');
+      var g = arr.reduce(function(acc,x){ return gcdFn(acc,x); });
+      var l = arr.reduce(function(acc,x){ return lcmFn(acc,x); });
+      return [line('গ.সা.গু (GCD)','GCD', fmt(g)), line('ল.সা.গু (LCM)','LCM', fmt(l))];
+    }
+  },
+  {
+    id:'prime', accent:'var(--c-math)',
+    name:{bn:'মৌলিক সংখ্যা যাচাই ও উৎপাদক', en:'Prime Check & Factorization'},
+    desc:{bn:'একটি সংখ্যা মৌলিক কিনা এবং এর মৌলিক উৎপাদক বের করুন।', en:'Check if a number is prime and find its prime factors.'},
+    fields:[ field('n','সংখ্যা','Number') ],
+    compute:function(v){
+      if(!isNum(v.n)) fail('সঠিক সংখ্যা দিন','Enter a valid number');
+      var n = Math.round(Math.abs(num(v.n)));
+      if(n<2) return [line('ফলাফল','Result', state.lang==='bn'?'মৌলিক নয়':'Not prime')];
+      var factors = [], nn = n, isPrime = true;
+      for (var i=2; i*i<=nn; i++) {
+        while (nn % i === 0) { factors.push(i); nn/=i; isPrime=false; }
+      }
+      if (nn>1) factors.push(nn);
+      if (factors.length===1) isPrime = true;
+      return [
+        line('মৌলিক সংখ্যা?','Is prime?', isPrime ? (state.lang==='bn'?'হ্যাঁ':'Yes') : (state.lang==='bn'?'না':'No')),
+        line('উৎপাদকসমূহ','Prime factors', factors.join(' × '))
+      ];
+    }
+  },
+  {
+    id:'npr-ncr', accent:'var(--c-math)',
+    name:{bn:'বিন্যাস ও সমাবেশ (nPr, nCr)', en:'Permutation & Combination'},
+    desc:{bn:'n সংখ্যা থেকে r নেওয়ার বিন্যাস ও সমাবেশ সংখ্যা।', en:'Number of permutations and combinations of r from n.'},
+    fields:[ field('n','n'), field('r','r') ],
+    compute:function(v){
+      if(!isNum(v.n)||!isNum(v.r)) fail('সঠিক সংখ্যা দিন','Enter valid numbers');
+      var n=Math.round(num(v.n)), r=Math.round(num(v.r));
+      if(r>n||r<0||n<0) fail('r অবশ্যই 0 এবং n এর মধ্যে হতে হবে','r must be between 0 and n');
+      return [line('nPr','nPr', fmt(nPr(n,r))), line('nCr','nCr', fmt(nCr(n,r)))];
+    }
+  },
+  {
+    id:'circle', accent:'var(--c-math)',
+    name:{bn:'বৃত্ত (ক্ষেত্রফল ও পরিধি)', en:'Circle (Area & Circumference)'},
+    desc:{bn:'ব্যাসার্ধ দিয়ে বৃত্তের ক্ষেত্রফল ও পরিধি বের করুন।', en:'Find area and circumference from radius.'},
+    fields:[ field('r','ব্যাসার্ধ','Radius') ],
+    compute:function(v){
+      if(!isNum(v.r)||num(v.r)<0) fail('সঠিক ব্যাসার্ধ দিন','Enter a valid radius');
+      var r=num(v.r);
+      return [line('ক্ষেত্রফল','Area', fmt(Math.PI*r*r)), line('পরিধি','Circumference', fmt(2*Math.PI*r))];
+    }
+  },
+  {
+    id:'rect', accent:'var(--c-math)',
+    name:{bn:'আয়তক্ষেত্র', en:'Rectangle'},
+    desc:{bn:'দৈর্ঘ্য ও প্রস্থ দিয়ে ক্ষেত্রফল ও পরিসীমা বের করুন।', en:'Find area and perimeter from length and width.'},
+    fields:[ field('l','দৈর্ঘ্য','Length'), field('w','প্রস্থ','Width') ],
+    compute:function(v){
+      if(!isNum(v.l)||!isNum(v.w)) fail('সঠিক মান দিন','Enter valid numbers');
+      return [line('ক্ষেত্রফল','Area', fmt(num(v.l)*num(v.w))), line('পরিসীমা','Perimeter', fmt(2*(num(v.l)+num(v.w))))];
+    }
+  },
+  {
+    id:'tri-heron', accent:'var(--c-math)',
+    name:{bn:'ত্রিভুজের ক্ষেত্রফল (হেরনের সূত্র)', en:"Triangle Area (Heron's Formula)"},
+    desc:{bn:'তিনটি বাহুর দৈর্ঘ্য দিয়ে ক্ষেত্রফল বের করুন।', en:'Find area from three side lengths.'},
+    fields:[ field('a','বাহু a','Side a'), field('b','বাহু b','Side b'), field('c','বাহু c','Side c') ],
+    compute:function(v){
+      if(!isNum(v.a)||!isNum(v.b)||!isNum(v.c)) fail('সঠিক মান দিন','Enter valid numbers');
+      var a=num(v.a),b=num(v.b),c=num(v.c);
+      if(a+b<=c||b+c<=a||a+c<=b) fail('এটি বৈধ ত্রিভুজ নয়','Not a valid triangle');
+      var s=(a+b+c)/2;
+      return [line('ক্ষেত্রফল','Area', fmt(Math.sqrt(s*(s-a)*(s-b)*(s-c)))), line('পরিসীমা','Perimeter', fmt(a+b+c))];
+    }
+  },
+  {
+    id:'sphere', accent:'var(--c-math)',
+    name:{bn:'গোলক', en:'Sphere'},
+    desc:{bn:'ব্যাসার্ধ দিয়ে গোলকের আয়তন ও ক্ষেত্রফল বের করুন।', en:'Find volume and surface area from radius.'},
+    fields:[ field('r','ব্যাসার্ধ','Radius') ],
+    compute:function(v){
+      if(!isNum(v.r)||num(v.r)<0) fail('সঠিক ব্যাসার্ধ দিন','Enter a valid radius');
+      var r=num(v.r);
+      return [line('আয়তন','Volume', fmt(4/3*Math.PI*r*r*r)), line('তলের ক্ষেত্রফল','Surface area', fmt(4*Math.PI*r*r))];
+    }
+  },
+  {
+    id:'cylinder', accent:'var(--c-math)',
+    name:{bn:'সিলিন্ডার', en:'Cylinder'},
+    desc:{bn:'ব্যাসার্ধ ও উচ্চতা দিয়ে আয়তন ও ক্ষেত্রফল বের করুন।', en:'Find volume and surface area from radius and height.'},
+    fields:[ field('r','ব্যাসার্ধ','Radius'), field('h','উচ্চতা','Height') ],
+    compute:function(v){
+      if(!isNum(v.r)||!isNum(v.h)) fail('সঠিক মান দিন','Enter valid numbers');
+      var r=num(v.r),h=num(v.h);
+      return [line('আয়তন','Volume', fmt(Math.PI*r*r*h)), line('তলের ক্ষেত্রফল','Surface area', fmt(2*Math.PI*r*(r+h)))];
+    }
+  },
+  {
+    id:'cone', accent:'var(--c-math)',
+    name:{bn:'শঙ্কু', en:'Cone'},
+    desc:{bn:'ব্যাসার্ধ ও উচ্চতা দিয়ে আয়তন ও ক্ষেত্রফল বের করুন।', en:'Find volume and surface area from radius and height.'},
+    fields:[ field('r','ব্যাসার্ধ','Radius'), field('h','উচ্চতা','Height') ],
+    compute:function(v){
+      if(!isNum(v.r)||!isNum(v.h)) fail('সঠিক মান দিন','Enter valid numbers');
+      var r=num(v.r),h=num(v.h);
+      var slant = Math.sqrt(r*r+h*h);
+      return [line('আয়তন','Volume', fmt(1/3*Math.PI*r*r*h)), line('তলের ক্ষেত্রফল','Surface area', fmt(Math.PI*r*(r+slant)))];
+    }
+  },
+  {
+    id:'ratio', accent:'var(--c-math)',
+    name:{bn:'অনুপাত সরলীকরণ', en:'Simplify a Ratio'},
+    desc:{bn:'দুটি সংখ্যার অনুপাত সরল আকারে দেখুন।', en:'Simplify a ratio between two numbers.'},
+    fields:[ field('a','a'), field('b','b') ],
+    compute:function(v){
+      if(!isNum(v.a)||!isNum(v.b)) fail('সঠিক মান দিন','Enter valid numbers');
+      var g = gcdFn(num(v.a), num(v.b)) || 1;
+      return [line('সরলীকৃত অনুপাত','Simplified ratio', (num(v.a)/g)+' : '+(num(v.b)/g))];
+    }
+  }
+];
+
+/* ---------------- PHYSICS ---------------- */
+CALCS.physics = [
+  {
+    id:'speed', accent:'var(--c-physics)',
+    name:{bn:'গতি (দূরত্ব ও সময়)', en:'Speed (Distance & Time)'},
+    desc:{bn:'v = দূরত্ব / সময়', en:'v = distance / time'},
+    fields:[ field('d','দূরত্ব (m)','Distance (m)'), field('t','সময় (s)','Time (s)') ],
+    compute:function(v){
+      if(!isNum(v.d)||!isNum(v.t)||num(v.t)===0) fail('সঠিক মান দিন, সময় শূন্য নয়','Enter valid values, time cannot be 0');
+      return [line('গতি','Speed', fmt(num(v.d)/num(v.t))+' m/s')];
+    }
+  },
+  {
+    id:'force', accent:'var(--c-physics)',
+    name:{bn:'বল (নিউটনের ২য় সূত্র)', en:"Force (Newton's 2nd Law)"},
+    desc:{bn:'F = m × a', en:'F = m × a'},
+    fields:[ field('m','ভর (kg)','Mass (kg)'), field('a','ত্বরণ (m/s²)','Acceleration (m/s²)') ],
+    compute:function(v){
+      if(!isNum(v.m)||!isNum(v.a)) fail('সঠিক মান দিন','Enter valid values');
+      return [line('বল','Force', fmt(num(v.m)*num(v.a))+' N')];
+    }
+  },
+  {
+    id:'work', accent:'var(--c-physics)',
+    name:{bn:'কাজ', en:'Work'},
+    desc:{bn:'W = F × d', en:'W = F × d'},
+    fields:[ field('f','বল (N)','Force (N)'), field('d','দূরত্ব (m)','Distance (m)') ],
+    compute:function(v){
+      if(!isNum(v.f)||!isNum(v.d)) fail('সঠিক মান দিন','Enter valid values');
+      return [line('কাজ','Work', fmt(num(v.f)*num(v.d))+' J')];
+    }
+  },
+  {
+    id:'ke', accent:'var(--c-physics)',
+    name:{bn:'গতিশক্তি', en:'Kinetic Energy'},
+    desc:{bn:'KE = ½mv²', en:'KE = ½mv²'},
+    fields:[ field('m','ভর (kg)','Mass (kg)'), field('vel','বেগ (m/s)','Velocity (m/s)') ],
+    compute:function(v){
+      if(!isNum(v.m)||!isNum(v.vel)) fail('সঠিক মান দিন','Enter valid values');
+      return [line('গতিশক্তি','Kinetic energy', fmt(0.5*num(v.m)*Math.pow(num(v.vel),2))+' J')];
+    }
+  },
+  {
+    id:'pe', accent:'var(--c-physics)',
+    name:{bn:'বিভবশক্তি', en:'Potential Energy'},
+    desc:{bn:'PE = mgh (g = 9.8 m/s²)', en:'PE = mgh (g = 9.8 m/s²)'},
+    fields:[ field('m','ভর (kg)','Mass (kg)'), field('h','উচ্চতা (m)','Height (m)') ],
+    compute:function(v){
+      if(!isNum(v.m)||!isNum(v.h)) fail('সঠিক মান দিন','Enter valid values');
+      return [line('বিভবশক্তি','Potential energy', fmt(num(v.m)*9.8*num(v.h))+' J')];
+    }
+  },
+  {
+    id:'power', accent:'var(--c-physics)',
+    name:{bn:'ক্ষমতা', en:'Power'},
+    desc:{bn:'P = কাজ / সময়', en:'P = Work / time'},
+    fields:[ field('w','কাজ (J)','Work (J)'), field('t','সময় (s)','Time (s)') ],
+    compute:function(v){
+      if(!isNum(v.w)||!isNum(v.t)||num(v.t)===0) fail('সঠিক মান দিন, সময় শূন্য নয়','Enter valid values, time cannot be 0');
+      return [line('ক্ষমতা','Power', fmt(num(v.w)/num(v.t))+' W')];
+    }
+  },
+  {
+    id:'ohm', accent:'var(--c-physics)',
+    name:{bn:'ওহমের সূত্র', en:"Ohm's Law"},
+    desc:{bn:'V = IR এবং P = VI', en:'V = IR and P = VI'},
+    fields:[ field('i','প্রবাহ I (A)','Current I (A)'), field('r','রোধ R (Ω)','Resistance R (Ω)') ],
+    compute:function(v){
+      if(!isNum(v.i)||!isNum(v.r)) fail('সঠিক মান দিন','Enter valid values');
+      var V = num(v.i)*num(v.r);
+      return [line('ভোল্টেজ','Voltage', fmt(V)+' V'), line('ক্ষমতা','Power', fmt(V*num(v.i))+' W')];
+    }
+  },
+  {
+    id:'density', accent:'var(--c-physics)',
+    name:{bn:'ঘনত্ব', en:'Density'},
+    desc:{bn:'ρ = ভর / আয়তন', en:'ρ = mass / volume'},
+    fields:[ field('m','ভর (kg)','Mass (kg)'), field('vv','আয়তন (m³)','Volume (m³)') ],
+    compute:function(v){
+      if(!isNum(v.m)||!isNum(v.vv)||num(v.vv)===0) fail('সঠিক মান দিন','Enter valid values');
+      return [line('ঘনত্ব','Density', fmt(num(v.m)/num(v.vv))+' kg/m³')];
+    }
+  },
+  {
+    id:'pressure', accent:'var(--c-physics)',
+    name:{bn:'চাপ', en:'Pressure'},
+    desc:{bn:'P = বল / ক্ষেত্রফল', en:'P = Force / Area'},
+    fields:[ field('f','বল (N)','Force (N)'), field('a','ক্ষেত্রফল (m²)','Area (m²)') ],
+    compute:function(v){
+      if(!isNum(v.f)||!isNum(v.a)||num(v.a)===0) fail('সঠিক মান দিন','Enter valid values');
+      return [line('চাপ','Pressure', fmt(num(v.f)/num(v.a))+' Pa')];
+    }
+  },
+  {
+    id:'projectile', accent:'var(--c-physics)',
+    name:{bn:'প্রক্ষেপক গতি', en:'Projectile Motion'},
+    desc:{bn:'প্রাথমিক বেগ ও কোণ দিয়ে পাল্লা, সর্বোচ্চ উচ্চতা ও সময় (g = 9.8 m/s²)', en:'Range, max height and time of flight from initial velocity and angle (g = 9.8 m/s²)'},
+    fields:[ field('v0','প্রাথমিক বেগ (m/s)','Initial velocity (m/s)'), field('ang','কোণ (ডিগ্রি)','Angle (degrees)') ],
+    compute:function(v){
+      if(!isNum(v.v0)||!isNum(v.ang)) fail('সঠিক মান দিন','Enter valid values');
+      var v0=num(v.v0), th=num(v.ang)*Math.PI/180, g=9.8;
+      return [
+        line('পাল্লা','Range', fmt(v0*v0*Math.sin(2*th)/g)+' m'),
+        line('সর্বোচ্চ উচ্চতা','Max height', fmt(v0*v0*Math.pow(Math.sin(th),2)/(2*g))+' m'),
+        line('মোট সময়','Time of flight', fmt(2*v0*Math.sin(th)/g)+' s')
+      ];
+    }
+  },
+  {
+    id:'gravitation', accent:'var(--c-physics)',
+    name:{bn:'নিউটনের মহাকর্ষ সূত্র', en:"Newton's Law of Gravitation"},
+    desc:{bn:'F = G·m₁·m₂/r²', en:'F = G·m₁·m₂/r²'},
+    fields:[ field('m1','ভর ১ (kg)','Mass 1 (kg)'), field('m2','ভর ২ (kg)','Mass 2 (kg)'), field('dist','দূরত্ব (m)','Distance (m)') ],
+    compute:function(v){
+      if(!isNum(v.m1)||!isNum(v.m2)||!isNum(v.dist)||num(v.dist)===0) fail('সঠিক মান দিন','Enter valid values');
+      var G=6.674e-11;
+      return [line('মহাকর্ষ বল','Gravitational force', fmt(G*num(v.m1)*num(v.m2)/Math.pow(num(v.dist),2), 6)+' N')];
+    }
+  }
+];
+
+/* ---------------- CHEMISTRY ---------------- */
+CALCS.chemistry = [
+  {
+    id:'moles', accent:'var(--c-chem)',
+    name:{bn:'মোল হিসাব', en:'Moles Calculation'},
+    desc:{bn:'মোল = ভর / মোলার ভর', en:'Moles = mass / molar mass'},
+    fields:[ field('mass','ভর (g)','Mass (g)'), field('mm','মোলার ভর (g/mol)','Molar mass (g/mol)') ],
+    compute:function(v){
+      if(!isNum(v.mass)||!isNum(v.mm)||num(v.mm)===0) fail('সঠিক মান দিন','Enter valid values');
+      return [line('মোল সংখ্যা','Moles', fmt(num(v.mass)/num(v.mm))+' mol')];
+    }
+  },
+  {
+    id:'molarity', accent:'var(--c-chem)',
+    name:{bn:'মোলারিটি', en:'Molarity'},
+    desc:{bn:'M = মোল / আয়তন (লিটার)', en:'M = moles / volume (liters)'},
+    fields:[ field('mol','মোল','Moles'), field('vol','আয়তন (L)','Volume (L)') ],
+    compute:function(v){
+      if(!isNum(v.mol)||!isNum(v.vol)||num(v.vol)===0) fail('সঠিক মান দিন','Enter valid values');
+      return [line('মোলারিটি','Molarity', fmt(num(v.mol)/num(v.vol))+' mol/L')];
+    }
+  },
+  {
+    id:'dilution', accent:'var(--c-chem)',
+    name:{bn:'তরলীকরণ (M₁V₁ = M₂V₂)', en:'Dilution (M₁V₁ = M₂V₂)'},
+    desc:{bn:'প্রাথমিক ঘনমাত্রা ও আয়তন এবং লক্ষ্য ঘনমাত্রা দিয়ে প্রয়োজনীয় চূড়ান্ত আয়তন বের করুন।', en:'Find final volume needed given initial concentration/volume and target concentration.'},
+    fields:[ field('m1','M₁ (mol/L)','M₁ (mol/L)'), field('v1','V₁ (mL)','V₁ (mL)'), field('m2','M₂ (mol/L)','M₂ (mol/L)') ],
+    compute:function(v){
+      if(!isNum(v.m1)||!isNum(v.v1)||!isNum(v.m2)||num(v.m2)===0) fail('সঠিক মান দিন','Enter valid values');
+      var v2 = num(v.m1)*num(v.v1)/num(v.m2);
+      return [line('চূড়ান্ত আয়তন V₂','Final volume V₂', fmt(v2)+' mL')];
+    }
+  },
+  {
+    id:'idealgas', accent:'var(--c-chem)',
+    name:{bn:'আদর্শ গ্যাস সমীকরণ', en:'Ideal Gas Law'},
+    desc:{bn:'PV = nRT থেকে চাপ (P) বের করুন (R = 0.0821 L·atm/mol·K)', en:'Find pressure (P) from PV = nRT (R = 0.0821 L·atm/mol·K)'},
+    fields:[ field('n','মোল (n)','Moles (n)'), field('vol','আয়তন (L)','Volume (L)'), field('temp','তাপমাত্রা (K)','Temperature (K)') ],
+    compute:function(v){
+      if(!isNum(v.n)||!isNum(v.vol)||!isNum(v.temp)||num(v.vol)===0) fail('সঠিক মান দিন','Enter valid values');
+      var P = num(v.n)*0.0821*num(v.temp)/num(v.vol);
+      return [line('চাপ (P)','Pressure (P)', fmt(P)+' atm')];
+    }
+  },
+  {
+    id:'ph', accent:'var(--c-chem)',
+    name:{bn:'pH হিসাব', en:'pH Calculation'},
+    desc:{bn:'[H⁺] ঘনমাত্রা থেকে pH বের করুন।', en:'Find pH from [H⁺] concentration.'},
+    fields:[ field('h','[H⁺] (mol/L)','[H⁺] (mol/L)') ],
+    compute:function(v){
+      if(!isNum(v.h)||num(v.h)<=0) fail('সঠিক ধনাত্মক মান দিন','Enter a valid positive value');
+      var ph = -Math.log10(num(v.h));
+      var cat = ph<7 ? (state.lang==='bn'?'অম্লীয়':'Acidic') : ph>7 ? (state.lang==='bn'?'ক্ষারীয়':'Basic') : (state.lang==='bn'?'নিরপেক্ষ':'Neutral');
+      return [line('pH','pH', fmt(ph,5)), line('প্রকৃতি','Nature', cat)];
+    }
+  },
+  {
+    id:'poh', accent:'var(--c-chem)',
+    name:{bn:'pOH হিসাব', en:'pOH Calculation'},
+    desc:{bn:'[OH⁻] ঘনমাত্রা থেকে pOH ও pH বের করুন (pH + pOH = 14)।', en:'Find pOH and pH from [OH⁻] concentration (pH + pOH = 14).'},
+    fields:[ field('oh','[OH⁻] (mol/L)','[OH⁻] (mol/L)') ],
+    compute:function(v){
+      if(!isNum(v.oh)||num(v.oh)<=0) fail('সঠিক ধনাত্মক মান দিন','Enter a valid positive value');
+      var poh = -Math.log10(num(v.oh));
+      return [line('pOH','pOH', fmt(poh,5)), line('pH','pH', fmt(14-poh,5))];
+    }
+  },
+  {
+    id:'concpct', accent:'var(--c-chem)',
+    name:{bn:'শতকরা গাঢ়ত্ব (w/w %)', en:'Percentage Concentration (w/w %)'},
+    desc:{bn:'দ্রবের ভর ও দ্রবণের মোট ভর দিয়ে শতকরা গাঢ়ত্ব বের করুন।', en:'Find mass percent from solute mass and total solution mass.'},
+    fields:[ field('solute','দ্রবের ভর (g)','Solute mass (g)'), field('soln','দ্রবণের ভর (g)','Solution mass (g)') ],
+    compute:function(v){
+      if(!isNum(v.solute)||!isNum(v.soln)||num(v.soln)===0) fail('সঠিক মান দিন','Enter valid values');
+      return [line('শতকরা গাঢ়ত্ব','Percent concentration', fmt(num(v.solute)/num(v.soln)*100)+' %')];
+    }
+  }
+];
+
+/* ---------------- BIOLOGY ---------------- */
+CALCS.biology = [
+  {
+    id:'bmi', accent:'var(--c-bio)',
+    name:{bn:'বিএমআই (BMI)', en:'BMI'},
+    desc:{bn:'ওজন ও উচ্চতা দিয়ে বডি মাস ইনডেক্স বের করুন।', en:'Body Mass Index from weight and height.'},
+    fields:[ field('w','ওজন (kg)','Weight (kg)'), field('h','উচ্চতা (cm)','Height (cm)') ],
+    compute:function(v){
+      if(!isNum(v.w)||!isNum(v.h)||num(v.h)===0) fail('সঠিক মান দিন','Enter valid values');
+      var hm = num(v.h)/100;
+      var bmi = num(v.w)/(hm*hm);
+      var cat;
+      if (bmi<18.5) cat = state.lang==='bn'?'কম ওজন':'Underweight';
+      else if (bmi<25) cat = state.lang==='bn'?'স্বাভাবিক':'Normal';
+      else if (bmi<30) cat = state.lang==='bn'?'অতিরিক্ত ওজন':'Overweight';
+      else cat = state.lang==='bn'?'স্থূল':'Obese';
+      return [line('BMI','BMI', fmt(bmi,4)), line('শ্রেণি','Category', cat)];
+    }
+  },
+  {
+    id:'bmr', accent:'var(--c-bio)',
+    name:{bn:'বিএমআর (BMR)', en:'BMR (Basal Metabolic Rate)'},
+    desc:{bn:'মিফলিন-সেন্ট জিওর সূত্র ব্যবহার করে দৈনিক বিশ্রামকালীন ক্যালোরি চাহিদা।', en:'Daily resting calorie need using the Mifflin-St Jeor formula.'},
+    fields:[
+      field('w','ওজন (kg)','Weight (kg)'), field('h','উচ্চতা (cm)','Height (cm)'), field('age','বয়স','Age'),
+      field('gender','লিঙ্গ','Gender', 'select', {options:[{v:'m',l:{bn:'পুরুষ',en:'Male'}},{v:'f',l:{bn:'নারী',en:'Female'}}]})
+    ],
+    compute:function(v){
+      if(!isNum(v.w)||!isNum(v.h)||!isNum(v.age)) fail('সঠিক মান দিন','Enter valid values');
+      var base = 10*num(v.w)+6.25*num(v.h)-5*num(v.age);
+      var bmr = v.gender==='m' ? base+5 : base-161;
+      return [line('BMR','BMR', fmt(bmr,5)+' kcal/day')];
+    }
+  },
+  {
+    id:'calorie', accent:'var(--c-bio)',
+    name:{bn:'দৈনিক ক্যালোরি চাহিদা', en:'Daily Calorie Needs'},
+    desc:{bn:'BMR ও শারীরিক সক্রিয়তার স্তর থেকে দৈনিক ক্যালোরি চাহিদা বের করুন।', en:'Daily calorie needs from BMR and activity level.'},
+    fields:[
+      field('bmr','BMR (kcal)','BMR (kcal)'),
+      field('activity','সক্রিয়তার স্তর','Activity level', 'select', {options:[
+        {v:'1.2', l:{bn:'বসে থাকা কাজ',en:'Sedentary'}},
+        {v:'1.375', l:{bn:'হালকা সক্রিয়',en:'Lightly active'}},
+        {v:'1.55', l:{bn:'মাঝারি সক্রিয়',en:'Moderately active'}},
+        {v:'1.725', l:{bn:'অতিরিক্ত সক্রিয়',en:'Very active'}},
+        {v:'1.9', l:{bn:'অত্যন্ত সক্রিয়',en:'Extremely active'}}
+      ]})
+    ],
+    compute:function(v){
+      if(!isNum(v.bmr)) fail('সঠিক মান দিন','Enter a valid value');
+      return [line('দৈনিক চাহিদা','Daily need', fmt(num(v.bmr)*parseFloat(v.activity),6)+' kcal')];
+    }
+  },
+  {
+    id:'bodyfat', accent:'var(--c-bio)',
+    name:{bn:'শরীরে চর্বির শতাংশ (আনুমানিক)', en:'Body Fat % (Estimate)'},
+    desc:{bn:'BMI-ভিত্তিক আনুমানিক হিসাব (Deurenberg সূত্র)।', en:'BMI-based estimate (Deurenberg formula).'},
+    fields:[
+      field('bmi','BMI','BMI'), field('age','বয়স','Age'),
+      field('gender','লিঙ্গ','Gender', 'select', {options:[{v:'m',l:{bn:'পুরুষ',en:'Male'}},{v:'f',l:{bn:'নারী',en:'Female'}}]})
+    ],
+    compute:function(v){
+      if(!isNum(v.bmi)||!isNum(v.age)) fail('সঠিক মান দিন','Enter valid values');
+      var g = v.gender==='m'?1:0;
+      var bf = 1.20*num(v.bmi)+0.23*num(v.age)-10.8*g-5.4;
+      return [line('আনুমানিক চর্বি','Estimated body fat', fmt(bf,5)+' %')];
+    }
+  },
+  {
+    id:'hr', accent:'var(--c-bio)',
+    name:{bn:'হৃদস্পন্দনের অঞ্চল', en:'Heart Rate Zones'},
+    desc:{bn:'সর্বোচ্চ হৃদস্পন্দন হার ও ব্যায়ামের জন্য লক্ষ্য অঞ্চল (220 − বয়স)।', en:'Max heart rate and exercise target zones (220 − age).'},
+    fields:[ field('age','বয়স','Age') ],
+    compute:function(v){
+      if(!isNum(v.age)) fail('সঠিক মান দিন','Enter a valid value');
+      var mhr = 220-num(v.age);
+      return [
+        line('সর্বোচ্চ হৃদস্পন্দন','Max heart rate', fmt(mhr)+' bpm'),
+        line('ফ্যাট বার্ন (৫০-৬৯%)','Fat burn (50-69%)', fmt(mhr*0.5)+'–'+fmt(mhr*0.69)+' bpm'),
+        line('কার্ডিও (৭০-৮৫%)','Cardio (70-85%)', fmt(mhr*0.7)+'–'+fmt(mhr*0.85)+' bpm')
+      ];
+    }
+  },
+  {
+    id:'duedate', accent:'var(--c-bio)',
+    name:{bn:'প্রসবের সম্ভাব্য তারিখ', en:'Pregnancy Due Date'},
+    desc:{bn:'শেষ মাসিকের তারিখ থেকে (Naegele নিয়ম: +280 দিন)।', en:"From last menstrual period date (Naegele's rule: +280 days)."},
+    fields:[ field('lmp','শেষ মাসিকের তারিখ','Last period date', 'date') ],
+    compute:function(v){
+      if(!v.lmp) fail('তারিখ নির্বাচন করুন','Please select a date');
+      var d = new Date(v.lmp);
+      if (isNaN(d.getTime())) fail('সঠিক তারিখ দিন','Enter a valid date');
+      d.setDate(d.getDate()+280);
+      var ds = d.toLocaleDateString(state.lang==='bn'?'bn-BD':'en-US', {year:'numeric',month:'long',day:'numeric'});
+      return [line('সম্ভাব্য প্রসবের তারিখ','Estimated due date', ds)];
+    }
+  }
+];
+
+/* ---------------- BUSINESS ---------------- */
+CALCS.business = [
+  {
+    id:'profitloss', accent:'var(--c-business)',
+    name:{bn:'লাভ-ক্ষতি', en:'Profit & Loss'},
+    desc:{bn:'ক্রয়মূল্য ও বিক্রয়মূল্য দিয়ে লাভ বা ক্ষতির পরিমাণ ও শতাংশ বের করুন।', en:'Find profit or loss amount and percentage from cost and sale price.'},
+    fields:[ field('cost','ক্রয়মূল্য','Cost price'), field('sell','বিক্রয়মূল্য','Sale price') ],
+    compute:function(v){
+      if(!isNum(v.cost)||!isNum(v.sell)||num(v.cost)===0) fail('সঠিক মান দিন','Enter valid values');
+      var diff = num(v.sell)-num(v.cost);
+      var pct = diff/num(v.cost)*100;
+      var label = diff>=0 ? (state.lang==='bn'?'লাভ':'Profit') : (state.lang==='bn'?'ক্ষতি':'Loss');
+      return [line(label, label, fmt(Math.abs(diff))), line('শতাংশ','Percentage', fmt(Math.abs(pct))+' %')];
+    }
+  },
+  {
+    id:'discount', accent:'var(--c-business)',
+    name:{bn:'ছাড় হিসাব', en:'Discount'},
+    desc:{bn:'মূল মূল্য ও ছাড়ের হার দিয়ে চূড়ান্ত মূল্য বের করুন।', en:'Find final price from original price and discount rate.'},
+    fields:[ field('price','মূল মূল্য','Original price'), field('pct','ছাড় (%)','Discount (%)') ],
+    compute:function(v){
+      if(!isNum(v.price)||!isNum(v.pct)) fail('সঠিক মান দিন','Enter valid values');
+      var d = num(v.price)*num(v.pct)/100;
+      return [line('ছাড়ের পরিমাণ','Discount amount', fmt(d)), line('চূড়ান্ত মূল্য','Final price', fmt(num(v.price)-d))];
+    }
+  },
+  {
+    id:'markup', accent:'var(--c-business)',
+    name:{bn:'মার্কআপ', en:'Markup'},
+    desc:{bn:'ক্রয়মূল্য ও মার্কআপ হার দিয়ে বিক্রয়মূল্য বের করুন।', en:'Find selling price from cost price and markup rate.'},
+    fields:[ field('cost','ক্রয়মূল্য','Cost price'), field('pct','মার্কআপ (%)','Markup (%)') ],
+    compute:function(v){
+      if(!isNum(v.cost)||!isNum(v.pct)) fail('সঠিক মান দিন','Enter valid values');
+      return [line('বিক্রয়মূল্য','Selling price', fmt(num(v.cost)*(1+num(v.pct)/100)))];
+    }
+  },
+  {
+    id:'vat', accent:'var(--c-business)',
+    name:{bn:'ভ্যাট / ট্যাক্স', en:'VAT / Tax'},
+    desc:{bn:'মূল পরিমাণ ও কর হার দিয়ে মোট পরিমাণ বের করুন।', en:'Find total amount from base amount and tax rate.'},
+    fields:[ field('amt','মূল পরিমাণ','Base amount'), field('pct','কর হার (%)','Tax rate (%)') ],
+    compute:function(v){
+      if(!isNum(v.amt)||!isNum(v.pct)) fail('সঠিক মান দিন','Enter valid values');
+      var tax = num(v.amt)*num(v.pct)/100;
+      return [line('করের পরিমাণ','Tax amount', fmt(tax)), line('মোট','Total', fmt(num(v.amt)+tax))];
+    }
+  },
+  {
+    id:'breakeven', accent:'var(--c-business)',
+    name:{bn:'ব্রেক-ইভেন পয়েন্ট', en:'Break-even Point'},
+    desc:{bn:'স্থায়ী খরচ, একক মূল্য ও একক পরিবর্তনশীল খরচ দিয়ে ব্রেক-ইভেন ইউনিট বের করুন।', en:'Find break-even units from fixed cost, unit price and unit variable cost.'},
+    fields:[ field('fixed','স্থায়ী খরচ','Fixed cost'), field('price','একক মূল্য','Price per unit'), field('varcost','একক পরিবর্তনশীল খরচ','Variable cost per unit') ],
+    compute:function(v){
+      if(!isNum(v.fixed)||!isNum(v.price)||!isNum(v.varcost)) fail('সঠিক মান দিন','Enter valid values');
+      var margin = num(v.price)-num(v.varcost);
+      if (margin<=0) fail('একক মূল্য অবশ্যই পরিবর্তনশীল খরচের চেয়ে বেশি হতে হবে','Price must exceed variable cost');
+      return [line('ব্রেক-ইভেন একক','Break-even units', fmt(num(v.fixed)/margin,6))];
+    }
+  },
+  {
+    id:'simpint', accent:'var(--c-business)',
+    name:{bn:'সরল সুদ', en:'Simple Interest'},
+    desc:{bn:'SI = P × R × T / 100', en:'SI = P × R × T / 100'},
+    fields:[ field('p','আসল','Principal'), field('r','সুদের হার (%/বছর)','Rate (%/year)'), field('t','সময় (বছর)','Time (years)') ],
+    compute:function(v){
+      if(!isNum(v.p)||!isNum(v.r)||!isNum(v.t)) fail('সঠিক মান দিন','Enter valid values');
+      var si = num(v.p)*num(v.r)*num(v.t)/100;
+      return [line('সুদ','Interest', fmt(si)), line('মোট','Total amount', fmt(num(v.p)+si))];
+    }
+  },
+  {
+    id:'compint', accent:'var(--c-business)',
+    name:{bn:'চক্রবৃদ্ধি সুদ', en:'Compound Interest'},
+    desc:{bn:'A = P(1 + r/n)^(nt)', en:'A = P(1 + r/n)^(nt)'},
+    fields:[
+      field('p','আসল','Principal'), field('r','সুদের হার (%/বছর)','Rate (%/year)'), field('t','সময় (বছর)','Time (years)'),
+      field('n','বছরে চক্রবৃদ্ধির সংখ্যা','Compounds per year', 'select', {options:[{v:'1',l:{bn:'বার্ষিক',en:'Annually'}},{v:'2',l:{bn:'অর্ধ-বার্ষিক',en:'Semi-annually'}},{v:'4',l:{bn:'ত্রৈমাসিক',en:'Quarterly'}},{v:'12',l:{bn:'মাসিক',en:'Monthly'}}]})
+    ],
+    compute:function(v){
+      if(!isNum(v.p)||!isNum(v.r)||!isNum(v.t)) fail('সঠিক মান দিন','Enter valid values');
+      var n=parseFloat(v.n);
+      var A = num(v.p)*Math.pow(1+num(v.r)/100/n, n*num(v.t));
+      return [line('মোট পরিমাণ','Total amount', fmt(A)), line('সুদ','Interest', fmt(A-num(v.p)))];
+    }
+  }
+];
+
+/* ---------------- BANKING ---------------- */
+CALCS.banking = [
+  {
+    id:'emi', accent:'var(--c-banking)',
+    name:{bn:'ইএমআই ক্যালকুলেটর', en:'EMI Calculator'},
+    desc:{bn:'ঋণের পরিমাণ, বার্ষিক সুদহার ও মেয়াদ দিয়ে মাসিক কিস্তি বের করুন।', en:'Find monthly installment from loan amount, annual rate and tenure.'},
+    fields:[ field('p','ঋণের পরিমাণ','Loan amount'), field('r','বার্ষিক সুদহার (%)','Annual rate (%)'), field('months','মেয়াদ (মাস)','Tenure (months)') ],
+    compute:function(v){
+      if(!isNum(v.p)||!isNum(v.r)||!isNum(v.months)||num(v.months)<=0) fail('সঠিক মান দিন','Enter valid values');
+      var P=num(v.p), n=Math.round(num(v.months)), rMonthly = num(v.r)/12/100;
+      var emi;
+      if (rMonthly===0) emi = P/n;
+      else emi = P*rMonthly*Math.pow(1+rMonthly,n)/(Math.pow(1+rMonthly,n)-1);
+      var total = emi*n;
+      return [
+        line('মাসিক কিস্তি (EMI)','Monthly EMI', fmt(emi)),
+        line('মোট পরিশোধ','Total payment', fmt(total)),
+        line('মোট সুদ','Total interest', fmt(total-P))
+      ];
+    }
+  },
+  {
+    id:'fd', accent:'var(--c-banking)',
+    name:{bn:'স্থায়ী আমানত (FD)', en:'Fixed Deposit (FD)'},
+    desc:{bn:'আসল, সুদহার, মেয়াদ ও চক্রবৃদ্ধির হার দিয়ে পরিপক্ব মূল্য বের করুন।', en:'Find maturity amount from principal, rate, term and compounding.'},
+    fields:[
+      field('p','আসল','Principal'), field('r','বার্ষিক সুদহার (%)','Annual rate (%)'), field('years','মেয়াদ (বছর)','Term (years)'),
+      field('n','চক্রবৃদ্ধি','Compounding', 'select', {options:[{v:'1',l:{bn:'বার্ষিক',en:'Annually'}},{v:'4',l:{bn:'ত্রৈমাসিক',en:'Quarterly'}},{v:'12',l:{bn:'মাসিক',en:'Monthly'}}]})
+    ],
+    compute:function(v){
+      if(!isNum(v.p)||!isNum(v.r)||!isNum(v.years)) fail('সঠিক মান দিন','Enter valid values');
+      var n = parseFloat(v.n);
+      var A = num(v.p)*Math.pow(1+num(v.r)/100/n, n*num(v.years));
+      return [line('পরিপক্ব মূল্য','Maturity amount', fmt(A)), line('মোট সুদ','Total interest', fmt(A-num(v.p)))];
+    }
+  },
+  {
+    id:'rd', accent:'var(--c-banking)',
+    name:{bn:'আবর্তক আমানত (RD)', en:'Recurring Deposit (RD)'},
+    desc:{bn:'প্রতি মাসের জমা, বার্ষিক সুদহার ও মেয়াদ দিয়ে পরিপক্ব মূল্য বের করুন।', en:'Find maturity amount from monthly deposit, annual rate and term.'},
+    fields:[ field('p','মাসিক জমা','Monthly deposit'), field('r','বার্ষিক সুদহার (%)','Annual rate (%)'), field('months','মেয়াদ (মাস)','Term (months)') ],
+    compute:function(v){
+      if(!isNum(v.p)||!isNum(v.r)||!isNum(v.months)||num(v.months)<=0) fail('সঠিক মান দিন','Enter valid values');
+      var P = num(v.p), n = Math.round(num(v.months)), rMonthly = num(v.r)/12/100;
+      var total = 0;
+      for (var i=1;i<=n;i++) total += P*Math.pow(1+rMonthly, n-i+1);
+      return [line('পরিপক্ব মূল্য','Maturity amount', fmt(total)), line('মোট জমা','Total deposited', fmt(P*n)), line('মোট সুদ','Total interest', fmt(total-P*n))];
+    }
+  },
+  {
+    id:'inflation', accent:'var(--c-banking)',
+    name:{bn:'মুদ্রাস্ফীতি সমন্বিত ভবিষ্যৎ মূল্য', en:'Inflation-Adjusted Future Value'},
+    desc:{bn:'বর্তমান মূল্য, মুদ্রাস্ফীতির হার ও বছর দিয়ে ভবিষ্যৎ খরচ বের করুন।', en:'Find future cost from present value, inflation rate and years.'},
+    fields:[ field('pv','বর্তমান মূল্য','Present value'), field('r','মুদ্রাস্ফীতি হার (%/বছর)','Inflation rate (%/year)'), field('years','বছর','Years') ],
+    compute:function(v){
+      if(!isNum(v.pv)||!isNum(v.r)||!isNum(v.years)) fail('সঠিক মান দিন','Enter valid values');
+      var fv = num(v.pv)*Math.pow(1+num(v.r)/100, num(v.years));
+      return [line('ভবিষ্যৎ মূল্য','Future value', fmt(fv))];
+    }
+  },
+  {
+    id:'savingsgoal', accent:'var(--c-banking)',
+    name:{bn:'সঞ্চয়ের লক্ষ্য (মাসিক জমা প্রয়োজন)', en:'Savings Goal (Required Monthly Saving)'},
+    desc:{bn:'লক্ষ্য পরিমাণ, বছর ও প্রত্যাশিত সুদহার দিয়ে প্রয়োজনীয় মাসিক জমা বের করুন।', en:'Find required monthly saving from goal amount, years and expected rate.'},
+    fields:[ field('goal','লক্ষ্য পরিমাণ','Goal amount'), field('years','বছর','Years'), field('r','বার্ষিক সুদহার (%)','Annual rate (%)') ],
+    compute:function(v){
+      if(!isNum(v.goal)||!isNum(v.years)||!isNum(v.r)||num(v.years)<=0) fail('সঠিক মান দিন','Enter valid values');
+      var n = num(v.years)*12, rMonthly = num(v.r)/12/100;
+      var pmt;
+      if (rMonthly===0) pmt = num(v.goal)/n;
+      else pmt = num(v.goal)*rMonthly/(Math.pow(1+rMonthly,n)-1);
+      return [line('মাসিক জমা প্রয়োজন','Required monthly saving', fmt(pmt))];
+    }
+  }
+];
+
+/* ============================= RENDER: CATEGORY CALCS ============================= */
+function renderField(calcId, f) {
+  var idAttr = calcId + '__' + f.id;
+  var h = '<div class="field">';
+  h += '<label for="'+idAttr+'">'+L(f.label)+'</label>';
+  if (f.type === 'select') {
+    h += '<select id="'+idAttr+'">';
+    f.options.forEach(function(o){ h += '<option value="'+o.v+'">'+L(o.l)+'</option>'; });
+    h += '</select>';
+  } else if (f.type === 'date') {
+    h += '<input type="date" id="'+idAttr+'">';
+  } else if (f.type === 'list') {
+    h += '<textarea id="'+idAttr+'" placeholder="'+(state.lang==='bn'?'যেমন: 4, 8, 6, 5, 3':'e.g. 4, 8, 6, 5, 3')+'"></textarea>';
+  } else {
+    h += '<input type="number" inputmode="decimal" id="'+idAttr+'" placeholder="0">';
+  }
+  h += '</div>';
+  return h;
+}
+
+/* ============================= CHEMISTRY EXTRAS: PERIODIC TABLE & COMPOUNDS ============================= */
+var UI2 = {
+  ptTitle: {bn:'মৌল অনুসন্ধান (পর্যায় সারণি)', en:'Element Lookup (Periodic Table)'},
+  ptDesc: {bn:'নাম, সংকেত বা পারমাণবিক সংখ্যা দিয়ে খুঁজুন — সবগুলো মৌলের পারমাণবিক সংখ্যা, সংকেত, নাম ও পারমাণবিক ভর।', en:'Search by name, symbol or atomic number — atomic number, symbol, name and atomic mass for every element.'},
+  ptPlaceholder: {bn:'যেমন: অক্সিজেন, O, বা 8', en:'e.g. Oxygen, O, or 8'},
+  ptNoResult: {bn:'কোনো মৌল পাওয়া যায়নি', en:'No element found'},
+  cmTitle: {bn:'যৌগের আণবিক ভর নির্ণয়', en:'Compound Molecular Mass Calculator'},
+  cmDesc: {bn:'যেকোনো রাসায়নিক সংকেত লিখুন (যেমন: H2O, Ca(OH)2, Al2(SO4)3) — আণবিক ভর ও উপাদানের ভাঙন দেখুন।', en:'Enter any chemical formula (e.g. H2O, Ca(OH)2, Al2(SO4)3) to see molecular mass and its elemental breakdown.'},
+  cmPlaceholder: {bn:'সংকেত লিখুন, যেমন: C6H12O6', en:'Enter formula, e.g. C6H12O6'},
+  cmInvalid: {bn:'সঠিক রাসায়নিক সংকেত লিখুন', en:'Enter a valid chemical formula'},
+  crTitle: {bn:'সাধারণ যৌগসমূহ', en:'Common Compounds Reference'},
+  crDesc: {bn:'পরিচিত যৌগের নাম, সংকেত ও আণবিক ভর — একটিতে চাপুন বিস্তারিত হিসাবের জন্য।', en:'Names, formulas and molecular masses of familiar compounds — tap one to see the full breakdown.'},
+  crSearchPh: {bn:'যৌগের নাম বা সংকেত দিয়ে খুঁজুন', en:'Search by compound name or formula'},
+  element: {bn:'মৌল', en:'Element'},
+  count: {bn:'সংখ্যা', en:'Count'},
+  atomicMass: {bn:'পারমাণবিক ভর', en:'Atomic mass'},
+  subtotal: {bn:'উপযোগফল', en:'Subtotal'},
+  molarMass: {bn:'মোট আণবিক ভর', en:'Total molecular mass'},
+  pickLabel: {bn:'কোন হিসাব করবেন?', en:'Which calculation?'}
+};
+
+function renderPtRow(el) {
+  var h = '<div class="pt-row">';
+  h += '<span class="pt-z">' + el.z + '</span>';
+  h += '<span class="pt-sym" style="--cat-color:var(--cat-' + el.cat + ')">' + el.sym + '</span>';
+  h += '<span class="pt-names"><span class="pt-name-bn">' + el.bn + '</span><br><span class="pt-name-en">' + el.en + '</span></span>';
+  h += '<span class="pt-mass">' + fmt(el.mass, 6) + '</span>';
+  h += '</div>';
+  return h;
+}
+
+function ptFilter(q) {
+  q = q.trim().toLowerCase();
+  if (!q) return PERIODIC_TABLE;
+  return PERIODIC_TABLE.filter(function(el) {
+    return el.sym.toLowerCase().indexOf(q) !== -1 ||
+      el.en.toLowerCase().indexOf(q) !== -1 ||
+      el.bn.indexOf(q) !== -1 ||
+      String(el.z) === q;
+  });
+}
+
+function renderCmResult(formula) {
+  var box = document.getElementById('cmResult');
+  var r = parseFormula(formula);
+  if (r.error || !r.rows || !r.rows.length) {
+    box.innerHTML = '<div class="result-err">⚠ ' + L(UI2.cmInvalid) + '</div>';
+    box.hidden = false;
+    return null;
+  }
+  var h = '<table class="compound-breakdown"><thead><tr>';
+  h += '<th>' + L(UI2.element) + '</th><th>' + L(UI2.count) + '</th><th>' + L(UI2.atomicMass) + '</th><th>' + L(UI2.subtotal) + '</th>';
+  h += '</tr></thead><tbody>';
+  r.rows.forEach(function(row) {
+    h += '<tr><td>' + row.sym + ' (' + (state.lang==='bn'?row.el.bn:row.el.en) + ')</td><td class="num">' + row.count + '</td><td class="num">' + fmt(row.mass,6) + '</td><td class="num">' + fmt(row.subtotal,6) + '</td></tr>';
+  });
+  h += '</tbody></table>';
+  h += '<div class="compound-total">' + L(UI2.molarMass) + ': ' + fmt(r.totalMass, 8) + ' g/mol</div>';
+  var copyLabel = '📋 ' + (state.lang==='bn'?'কপি':'Copy');
+  h += '<button class="copy-btn" type="button" data-label="' + copyLabel + '">' + copyLabel + '</button>';
+  box.innerHTML = h;
+  box.hidden = false;
+  attachCopyButton(box, function() { return L(UI2.molarMass) + ': ' + fmt(r.totalMass, 8) + ' g/mol'; });
+  return r;
+}
+
+/* ============================= UNIFIED CATEGORY VIEW: ONE BOX, A PICKER, A LIVE STAGE ============================= */
+function itemsFor(catId) {
+  var items = (CALCS[catId] || []).map(function(c) { return Object.assign({kind:'calc'}, c); });
+  if (catId === 'chemistry') {
+    items = [
+      {kind:'periodic', id:'pt-lookup', accent:'var(--c-chem)', name:UI2.ptTitle, desc:UI2.ptDesc},
+      {kind:'compound', id:'compound-calc', accent:'var(--c-chem)', name:UI2.cmTitle, desc:UI2.cmDesc},
+      {kind:'compoundRef', id:'common-compounds', accent:'var(--c-chem)', name:UI2.crTitle, desc:UI2.crDesc}
+    ].concat(items);
+  }
+  return items;
+}
+
+function renderStage(catId, item) {
+  var h = '<p class="stage-desc">' + L(item.desc) + '</p>';
+  if (item.kind === 'calc') {
+    h += '<div class="field-grid' + (item.fields.length <= 1 ? ' single' : '') + '">';
+    item.fields.forEach(function(f) { h += renderField(item.id, f); });
+    h += '</div>';
+    h += '<div class="calc-actions">';
+    h += '<button class="btn-calc" type="button" data-calc="' + item.id + '" style="--accent:' + item.accent + '">' + L(UI.calculate) + '</button>';
+    h += '<button class="btn-clear-panel" type="button" data-clear="' + item.id + '">' + L(UI.clear) + '</button>';
+    h += '</div>';
+    h += '<div class="result-box" id="res__' + item.id + '" hidden></div>';
+  } else if (item.kind === 'periodic') {
+    h += '<input class="pt-search" id="ptSearch" type="text" placeholder="' + L(UI2.ptPlaceholder) + '">';
+    h += '<div class="pt-legend">';
+    Object.keys(CAT_LABELS).forEach(function(k) { h += '<span><i style="background:var(--cat-' + k + ')"></i>' + L(CAT_LABELS[k]) + '</span>'; });
+    h += '</div>';
+    h += '<div class="pt-list" id="ptList"></div>';
+  } else if (item.kind === 'compound') {
+    h += '<div class="field-grid single"><div class="field"><input type="text" id="cmFormula" placeholder="' + L(UI2.cmPlaceholder) + '"></div></div>';
+    h += '<div class="calc-actions">';
+    h += '<button class="btn-calc" type="button" id="cmCalcBtn" style="--accent:' + item.accent + '">' + L(UI.calculate) + '</button>';
+    h += '<button class="btn-clear-panel" type="button" id="cmClearBtn">' + L(UI.clear) + '</button>';
+    h += '</div>';
+    h += '<div class="result-box" id="cmResult" hidden></div>';
+  } else if (item.kind === 'compoundRef') {
+    h += '<input class="pt-search" id="crSearch" type="text" placeholder="' + L(UI2.crSearchPh) + '">';
+    h += '<div class="pt-list" id="crList"></div>';
+  }
+  return h;
+}
+
+function bindStage(catId, item) {
+  if (item.kind === 'calc') {
+    var btn = document.querySelector('[data-calc="' + item.id + '"]');
+    var clearBtn = document.querySelector('[data-clear="' + item.id + '"]');
+    btn.addEventListener('click', function() { runCalc(catId, item); });
+    clearBtn.addEventListener('click', function() {
+      item.fields.forEach(function(f) {
+        var el = document.getElementById(item.id + '__' + f.id);
+        if (el) el.value = '';
+      });
+      var box = document.getElementById('res__' + item.id);
+      box.hidden = true; box.innerHTML = '';
+    });
+  } else if (item.kind === 'periodic') {
+    var ptListEl = document.getElementById('ptList');
+    function renderPtList(q) {
+      var results = ptFilter(q || '');
+      ptListEl.innerHTML = results.length ? results.map(renderPtRow).join('') : '<div class="pt-empty">' + L(UI2.ptNoResult) + '</div>';
+    }
+    renderPtList('');
+    document.getElementById('ptSearch').addEventListener('input', function(e) { renderPtList(e.target.value); });
+  } else if (item.kind === 'compound') {
+    document.getElementById('cmCalcBtn').addEventListener('click', function() {
+      var formula = document.getElementById('cmFormula').value;
+      var r = renderCmResult(formula);
+      if (r) pushHistory('chemistry', L(UI2.cmTitle), formula, fmt(r.totalMass, 8) + ' g/mol');
+    });
+    document.getElementById('cmClearBtn').addEventListener('click', function() {
+      document.getElementById('cmFormula').value = '';
+      var box = document.getElementById('cmResult');
+      box.hidden = true; box.innerHTML = '';
+    });
+  } else if (item.kind === 'compoundRef') {
+    var crListEl = document.getElementById('crList');
+    function renderCrList(q) {
+      q = (q || '').trim().toLowerCase();
+      var results = COMPOUNDS.filter(function(c) {
+        if (!q) return true;
+        return c.f.toLowerCase().indexOf(q) !== -1 || c.bn.indexOf(q) !== -1 || c.en.toLowerCase().indexOf(q) !== -1;
+      });
+      crListEl.innerHTML = results.length ? results.map(function(c) {
+        return '<div class="compound-item" data-formula="' + c.f + '">' +
+          '<span><span class="compound-formula">' + c.f + '</span> — ' + (state.lang==='bn'?c.bn:c.en) + '</span>' +
+          '<span class="compound-mass">' + fmt(c.mass, 6) + ' g/mol</span>' +
+          '</div>';
+      }).join('') : '<div class="pt-empty">' + L(UI2.ptNoResult) + '</div>';
+      crListEl.querySelectorAll('.compound-item').forEach(function(row) {
+        row.addEventListener('click', function() {
+          var f = row.getAttribute('data-formula');
+          switchCalcItem(catId, 'compound-calc', function() {
+            document.getElementById('cmFormula').value = f;
+            var r = renderCmResult(f);
+            if (r) {
+              var c = COMPOUNDS.filter(function(x) { return x.f === f; })[0];
+              pushHistory('chemistry', L(UI2.cmTitle), f + (c ? ' (' + (state.lang==='bn'?c.bn:c.en) + ')' : ''), fmt(r.totalMass, 8) + ' g/mol');
+            }
+          });
+        });
+      });
+    }
+    renderCrList('');
+    document.getElementById('crSearch').addEventListener('input', function(e) { renderCrList(e.target.value); });
+  }
+}
+
+function switchCalcItem(catId, id, afterCb) {
+  var items = itemsFor(catId);
+  var item = items.filter(function(it) { return it.id === id; })[0];
+  if (!item) return;
+  state.selectedCalc[catId] = id;
+  var picker = document.getElementById('picker__' + catId);
+  if (picker) picker.value = id;
+  var box = document.getElementById('singleBox__' + catId);
+  if (box) box.style.setProperty('--accent', item.accent);
+  var stage = document.getElementById('stage__' + catId);
+  stage.innerHTML = renderStage(catId, item);
+  bindStage(catId, item);
+  if (afterCb) afterCb(item);
+}
+
+function renderCategory(catId) {
+  var items = itemsFor(catId);
+  var h = viewHeader(catId);
+  var selId = state.selectedCalc[catId];
+  if (!selId || !items.some(function(it) { return it.id === selId; })) selId = items[0].id;
+  state.selectedCalc[catId] = selId;
+  var selItem = items.filter(function(it) { return it.id === selId; })[0];
+  h += '<div class="calc-panel calc-single" id="singleBox__' + catId + '" style="--accent:' + selItem.accent + '">';
+  h += '<span class="picker-label">' + L(UI2.pickLabel) + '</span>';
+  h += '<select class="calc-picker" id="picker__' + catId + '">';
+  items.forEach(function(it) { h += '<option value="' + it.id + '"' + (it.id === selId ? ' selected' : '') + '>' + L(it.name) + '</option>'; });
+  h += '</select>';
+  h += '<div class="calc-stage" id="stage__' + catId + '">' + renderStage(catId, selItem) + '</div>';
+  h += '</div>';
+  return h;
+}
+
+function bindCategory(catId) {
+  var items = itemsFor(catId);
+  var selId = state.selectedCalc[catId] || items[0].id;
+  var selItem = items.filter(function(it) { return it.id === selId; })[0] || items[0];
+  bindStage(catId, selItem);
+  document.getElementById('picker__' + catId).addEventListener('change', function(e) {
+    switchCalcItem(catId, e.target.value);
+  });
+}
+
+function runCalc(catId, c) {
+  var values = {};
+  c.fields.forEach(function(f) {
+    var el = document.getElementById(c.id+'__'+f.id);
+    values[f.id] = el ? el.value : '';
+  });
+  var box = document.getElementById('res__'+c.id);
+  try {
+    var lines = c.compute(values);
+    var h = '';
+    lines.forEach(function(ln){ h += '<div class="result-line"><span class="rlabel">'+L(ln.label)+'</span><span class="rval">'+ln.value+'</span></div>'; });
+    var copyLabel = '📋 ' + (state.lang==='bn'?'কপি':'Copy');
+    h += '<button class="copy-btn" type="button" data-label="' + copyLabel + '">' + copyLabel + '</button>';
+    box.innerHTML = h;
+    box.hidden = false;
+    var summary = c.fields.map(function(f){ return L(f.label)+'='+values[f.id]; }).join(', ');
+    var resultSummary = lines.map(function(ln){ return L(ln.label)+': '+ln.value; }).join(' · ');
+    attachCopyButton(box, function() { return resultSummary; });
+    pushHistory(catId, L(c.name), summary, resultSummary);
+  } catch (e) {
+    var msg = e && e.isCalcError ? (state.lang==='bn'?e.bn:e.en) : L(UI.invalidInput);
+    box.innerHTML = '<div class="result-err">⚠ ' + msg + '</div>';
+    box.hidden = false;
+  }
+}
+
+/* ============================= HISTORY ============================= */
+function renderHistory() {
+  var h = viewHeader('history');
+  h += '<div class="hist-toolbar"><button class="hist-clear" id="histClearBtn" type="button">'+L(UI.clearHistory)+'</button></div>';
+  h += '<div id="histList">';
+  if (!state.history.length) {
+    h += '<div class="hist-empty">'+L(UI.noHistory)+'</div>';
+  } else {
+    state.history.forEach(function(item, idx) {
+      var t = TABS.filter(function(x){return x.id===item.cat;})[0];
+      var color = t ? t.color : 'var(--c-history)';
+      h += '<div class="hist-item">';
+      h += '<span class="hist-dot" style="background:'+color+'"></span>';
+      h += '<div class="hist-body">';
+      h += '<div class="hist-name">'+item.name+'</div>';
+      h += '<div class="hist-expr">'+item.expr+(item.result? ' → '+item.result : '')+'</div>';
+      h += '<div class="hist-time">'+fmtTime(item.ts)+'</div>';
+      h += '</div>';
+      h += '<button class="hist-del" type="button" data-idx="'+idx+'" aria-label="'+(state.lang==='bn'?'মুছুন':'Delete')+'">✕</button>';
+      h += '</div>';
+    });
+  }
+  h += '</div>';
+  return h;
+}
+
+function bindHistory() {
+  var btn = document.getElementById('histClearBtn');
+  if (btn) btn.addEventListener('click', function() {
+    state.history = [];
+    saveHistory();
+    renderView();
+  });
+  document.querySelectorAll('.hist-del').forEach(function(delBtn) {
+    delBtn.addEventListener('click', function() {
+      var idx = parseInt(delBtn.getAttribute('data-idx'), 10);
+      state.history.splice(idx, 1);
+      saveHistory();
+      renderView();
+    });
+  });
+}
+
+/* ============================= CLIPBOARD HELPER ============================= */
+function fallbackCopy(text) {
+  try {
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.focus(); ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+  } catch (e) {}
+}
+function copyText(text, doneCb) {
+  try {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function() { if (doneCb) doneCb(); }).catch(function() { fallbackCopy(text); if (doneCb) doneCb(); });
+      return;
+    }
+  } catch (e) {}
+  fallbackCopy(text);
+  if (doneCb) doneCb();
+}
+function attachCopyButton(box, getText) {
+  var btn = box.querySelector('.copy-btn');
+  if (!btn) return;
+  btn.addEventListener('click', function() {
+    copyText(getText(), function() {
+      var original = btn.getAttribute('data-label');
+      btn.textContent = '✓ ' + (state.lang==='bn' ? 'কপি হয়েছে' : 'Copied');
+      setTimeout(function() { btn.textContent = original; }, 1400);
+    });
+  });
+}
+
+/* ============================= INIT ============================= */
+document.getElementById('langBtn').addEventListener('click', function() {
+  state.lang = state.lang === 'bn' ? 'en' : 'bn';
+  document.documentElement.lang = state.lang;
+  renderTabs();
+  renderView();
+});
+document.getElementById('histBtn').addEventListener('click', function() {
+  state.tab = 'history';
+  renderTabs();
+  renderView();
+});
+
+/* Physical keyboard support for the scientific calculator (desktop use) */
+document.addEventListener('keydown', function(e) {
+  if (state.tab !== 'sci') return;
+  var tag = document.activeElement ? document.activeElement.tagName : '';
+  if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+  var key = e.key;
+  if (/^[0-9.]$/.test(key)) { handleSciBtn({type:'ins', text:key}); e.preventDefault(); return; }
+  if ('+-*/^!%().'.indexOf(key) !== -1) { handleSciBtn({type:'ins', text:key}); e.preventDefault(); return; }
+  if (key === 'Enter' || key === '=') { handleSciBtn({type:'eq'}); e.preventDefault(); return; }
+  if (key === 'Backspace') { handleSciBtn({type:'del'}); e.preventDefault(); return; }
+  if (key === 'Escape') { handleSciBtn({type:'ac'}); e.preventDefault(); return; }
+});
+
+renderTabs();
+renderView();
+})();
+</script>
+</body>
+</html>
